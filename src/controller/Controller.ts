@@ -20,6 +20,8 @@ export default class Controller
     private lineHandler: LineHandler;
     private deviceHandler: DeviceHandler;
 
+    timer: ReturnType<typeof setInterval> | 0 = 0;
+
     constructor(space: Space, view: View) 
     {
         this.space = space;
@@ -27,7 +29,7 @@ export default class Controller
         this.ballHandler = new BallHandler(this);
         this.lineHandler = new LineHandler(this);
         this.deviceHandler = new DeviceHandler(this);
-        globus.time = 0;
+        this.space.time = 0;
         globus.strikes = 0;
         
         this.bindHandlers()
@@ -174,17 +176,18 @@ export default class Controller
     }
 
     step() {
-        globus.time++;
+        this.space.time++;
         this.space.step();
         // віміри через кожні Q кроків
-        if (globus.time % globus.metr == 0) {
+        if (this.space.time % globus.metr == 0) {
             this.space.measure();
             this.view.drawMeasure();
         }
         this.view.draw();
     }
 
-    timer = 0
+
+
 
     stop() {
         if (this.timer) {
@@ -204,15 +207,15 @@ export default class Controller
 
 
     private startFooter() {
-        let prevSteps = globus.time;
+        let prevSteps = this.space.time;
         setInterval(() => {
-            let freq = globus.time - prevSteps;
-            prevSteps = globus.time;
+            let freq = this.space.time - prevSteps;
+            prevSteps = this.space.time;
 
             let strikes = globus.strikes * 100 / globus.N || 0;
             
             this.view.showFooter({
-                'steps': globus.time,
+                'steps': this.space.time,
                 'freq': freq,
                 'strikes': strikes.toFixed(1) + '%' ,
                 'N': globus.N,

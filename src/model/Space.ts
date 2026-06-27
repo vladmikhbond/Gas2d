@@ -13,6 +13,8 @@ export default class Space
     height: number;
     deltaSize = 0;  // to reduce checkered effect
 
+    time = 0      // такти часу
+
     givenHeat = 0;      // тепло, віддане усіма нагрівачами
     takenHeat = 0;      // тепло, забране усіма охолоджувачами 
     // підраховує тепло при нагріванні 
@@ -28,7 +30,6 @@ export default class Space
 
     bombs: Bomb[] = [];
 
-    time = 0      // такти часу
 
     constructor(width: number, height: number) {
         this.width = width;
@@ -43,7 +44,7 @@ export default class Space
         this.clearLines();
         this.clearDevices();
         this.givenHeat = this.takenHeat = 0;
-        globus.time = 0;
+        this.time = 0;
     }
 
 //#region Balls

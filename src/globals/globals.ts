@@ -22,7 +22,6 @@ export const globus =
 
 export const page = { 
     canvasElement: <HTMLCanvasElement>document.getElementById('canvas')!,
-    canvas2Element: <HTMLCanvasElement>document.getElementById('canvas2')!,
 
     noneRadio: <HTMLInputElement>document.getElementById('none')!,
     ballsRadio: <HTMLInputElement>document.getElementById('balls')!,

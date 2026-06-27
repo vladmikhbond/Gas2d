@@ -85,12 +85,12 @@ export default class Controller
         });
 
 
-        page.canvas2Element.addEventListener("mousemove", (e) => {
-           const plunger = this.space.plunger;
-           if (!plunger) return;
-           this.view.showFooter2(plunger, e.offsetX, e.offsetY);
+        // page.canvas2Element.addEventListener("mousemove", (e) => {
+        //    const plunger = this.space.plunger;
+        //    if (!plunger) return;
+        //    this.view.showFooter2(plunger, e.offsetX, e.offsetY);
             
-        });
+        // });
 
     } 
     
@@ -172,7 +172,7 @@ export default class Controller
         page.canvasElement.onmousemove = (e) => handler.mousemove(e);
         page.canvasElement.onmouseup = (e) => handler.mouseup(e);
         page.canvasElement.onkeydown = (e) => handler.keydown(e);
-        page.canvas2Element.onkeydown = (e) => handler.keydown(e);
+        // page.canvas2Element.onkeydown = (e) => handler.keydown(e);
     }
 
     step() {
@@ -181,12 +181,10 @@ export default class Controller
         // віміри через кожні Q кроків
         if (this.space.time % globus.metr == 0) {
             this.space.measure();
-            this.view.drawMeasure();
+            // this.view.drawMeasure();
         }
         this.view.draw();
     }
-
-
 
 
     stop() {

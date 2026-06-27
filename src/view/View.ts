@@ -15,6 +15,8 @@ export default class View
     ctx: CanvasRenderingContext2D;
     ctx2: CanvasRenderingContext2D;
 
+    viz = 10           // малювати кожну vi-ту частку
+
     constructor(space: Space) {
         this.space = space;
         this.ctx = (<HTMLCanvasElement>page.canvasElement!).getContext("2d")!;       
@@ -34,7 +36,7 @@ export default class View
 
         // balls - малює не всі частки
         for (const ball of space.balls()) {    
-            if (ball.id % globus.viz == 0) {
+            if (ball.id % this.viz == 0) {
                 this.drawBall(ball);
             }
         }

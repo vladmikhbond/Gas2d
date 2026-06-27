@@ -52,7 +52,7 @@ export default class Image
         }
         
         // globus
-        let glo = {g: globus.g, gBall: globus.gBall, cell: globus.cell, viz: globus.viz, quant: globus.quant, metr: globus.metr};        
+        let glo = {g: globus.g, gBall: globus.gBall, cell: globus.cell, quant: globus.quant, metr: globus.metr};        
         let json = JSON.stringify({bombs, lines, plungers, devices, glo});
 
         return json;
@@ -105,7 +105,7 @@ export default class Image
     load(json: string) 
     {
         this.deserialize(json);
-        const obj = {g: globus.g, gBall: globus.gBall, cell: globus.cell, viz: globus.viz, quant: globus.quant, metr: globus.metr};
+        const obj = {g: globus.g, gBall: globus.gBall, cell: globus.cell, quant: globus.quant, metr: globus.metr};
         page.optionsGloElement.value = Options.obj2str(obj);
     }
 

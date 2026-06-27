@@ -42,7 +42,7 @@ export class BallCont {
     //
     *values() {
         let arr = this.arr;
-        if (globus.steps % 2) {
+        if (globus.time % 2) {
             for(let r = 0; r < arr.length; r++) {
                 for(let c = 0; c < arr[0].length; c++) {
                     for(let i = 0; i < arr[r][c].length; i++) {

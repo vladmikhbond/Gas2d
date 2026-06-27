@@ -6,7 +6,7 @@ import Device from '../model/Device.js';
 import {Measurer} from '../model/Measurer.js';
 import {Heater} from '../model/Heaters.js';
 import {Plunger, PlungerMetering} from '../model/Plunger.js';
-import {ProcessState, ProcessInterpreter} from '../controller/ProcessInterpreter.js';
+
 
 
 export default class View 
@@ -29,9 +29,8 @@ export default class View
         ctx.clearRect(0, 0, page.canvasElement.width, page.canvasElement.height);
         
         // grid
-        if (ProcessInterpreter.procState != ProcessState.Run) {
-            this.drawGrayGrid();
-        }
+        this.drawGrayGrid();
+
 
         // balls - малює не всі частки
         for (const ball of space.balls()) {    
@@ -97,7 +96,6 @@ export default class View
         if (ball.r <= 5) {
             ctx.fillRect(x - 1, y - 2, 2, 4);
             ctx.fillRect(x - 2, y - 1, 4, 2);
-            // ctx.fillRect(x - 0.5, y - 0.5, 1, 1);
             return;
         }
         ctx.beginPath();

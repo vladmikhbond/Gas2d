@@ -13,7 +13,7 @@ export const globus =
     quant: 5,          // квант простору             
 
     N: 0,              // поточна кількість куль
-    steps: 0,          // заг. кількість кроків 
+    time: 0,          // заг. кількість кроків 
     strikes: 0,        // заг. кількість зіткнень    
 
     // квантує простір при конструюванні сцен
@@ -34,8 +34,6 @@ export const page = {
     stepButton: <HTMLButtonElement>document.getElementById('step')!,
     keysSpan: <HTMLSpanElement>document.getElementById('keys')!,
 
-    startProcessButton: <HTMLButtonElement>document.getElementById('start-process-btn')!,
-    pauseProcessButton: <HTMLButtonElement>document.getElementById('pause-process-btn')!,
 
     processArea: <HTMLTextAreaElement>document.getElementById('process-script')!,
     imageElement: <HTMLInputElement>document.getElementById('image-json')!,

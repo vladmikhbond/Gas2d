@@ -6,7 +6,7 @@ import Handler from './Handlers.js';
 import BallHandler from './BallHandler.js';
 import LineHandler from './LineHandler.js';
 import DeviceHandler from './DeviceHandler.js';
-import {ProcessState, ProcessInterpreter} from './ProcessInterpreter.js';
+
 
 export default class Controller 
 {
@@ -27,7 +27,7 @@ export default class Controller
         this.ballHandler = new BallHandler(this);
         this.lineHandler = new LineHandler(this);
         this.deviceHandler = new DeviceHandler(this);
-        globus.steps = 0;
+        globus.time = 0;
         globus.strikes = 0;
         
         this.bindHandlers()
@@ -65,44 +65,16 @@ export default class Controller
         page.kindRadios[1].addEventListener("change", () => {
             this.switchSubstate(1)
         });
-        
 
-        page.startProcessButton.addEventListener('click',  async (e) => {
-            ProcessInterpreter.procState = ProcessState.Stop;
-            //
-            setTimeout(async () => {
-                const area = page.processArea;
-                let selLength = area.selectionEnd - area.selectionStart;
-                let script = selLength ? area.value.slice(area.selectionStart, area.selectionEnd) : area.value; 
-                script = script.replaceAll('►', '');               
-                let interpreter = new ProcessInterpreter(script, this);
-
-                ProcessInterpreter.procState = ProcessState.Pause;
-                page.pauseProcessButton.innerHTML = '►'; 
-
-                await interpreter.interpret();
-            }, 100);
-
-        } ) 
-
-        page.pauseProcessButton.addEventListener('click', () => {
-            switch (ProcessInterpreter.procState) {
-                case ProcessState.Pause:
-                    ProcessInterpreter.procState = ProcessState.Run;
-                    page.pauseProcessButton.innerHTML = '■';
-                    break;
-                case ProcessState.Run: 
-                    ProcessInterpreter.procState = ProcessState.Pause;
-                    page.pauseProcessButton.innerHTML = '►';
-                    break;
-            }
+        document.getElementById('pause-process-btn')!.addEventListener('click', () => {
+            if (this.timer == 0) 
+                this.run();
+            else
+                this.stop();
         })
 
         page.stepButton.addEventListener('click', () => {
-            ProcessInterpreter.procState = ProcessState.Run;
             this.step();
-            ProcessInterpreter.procState = ProcessState.Pause;
-            page.pauseProcessButton.innerHTML = '►';
         })
 
         page.optionsGloElement.addEventListener("change", () => {
@@ -202,26 +174,45 @@ export default class Controller
     }
 
     step() {
-        globus.steps++;
+        globus.time++;
         this.space.step();
         // віміри через кожні Q кроків
-        if (globus.steps % globus.metr == 0) {
+        if (globus.time % globus.metr == 0) {
             this.space.measure();
             this.view.drawMeasure();
         }
         this.view.draw();
     }
 
+    timer = 0
+
+    stop() {
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = 0;
+        }
+    }
+
+    run() {
+        if (this.timer) return;
+        this.timer = setInterval(() => { 
+            this.step();
+        }, 1);
+    }
+
+
+
+
     private startFooter() {
-        let prevSteps = globus.steps;
+        let prevSteps = globus.time;
         setInterval(() => {
-            let freq = globus.steps - prevSteps;
-            prevSteps = globus.steps;
+            let freq = globus.time - prevSteps;
+            prevSteps = globus.time;
 
             let strikes = globus.strikes * 100 / globus.N || 0;
             
             this.view.showFooter({
-                'steps': globus.steps,
+                'steps': globus.time,
                 'freq': freq,
                 'strikes': strikes.toFixed(1) + '%' ,
                 'N': globus.N,

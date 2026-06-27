@@ -28,6 +28,7 @@ export default class Space
 
     bombs: Bomb[] = [];
 
+    time = 0      // такти часу
 
     constructor(width: number, height: number) {
         this.width = width;
@@ -42,7 +43,7 @@ export default class Space
         this.clearLines();
         this.clearDevices();
         this.givenHeat = this.takenHeat = 0;
-        globus.steps = 0;
+        globus.time = 0;
     }
 
 //#region Balls

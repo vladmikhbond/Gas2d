@@ -1,0 +1,55 @@
+
+// Основне газове рівняння: P * V = N * BOLTZ * T
+// На сторінці:   "g = 0.1, gBall = 0, cell = 20, viz = 10, quant = 5, loss = 0, metr = 1"
+export const globus = 
+{
+    STEP_PERIOD: 20,   // мінім. період одного кроку
+    BOLTZ: 1/30, // 0.005,       // стала Больцмана (в житті = 1.380649e−23) // was 1/30
+    cell: 20,          // сторона комірки
+    g: 0.1,            // сила тяжіння
+    gBall: 0,          // чи впливає тяжіння на кулі (0-ні, 1-впливає) 
+    metr: 10,          // інтервал між вимірюваннями (у кроках)
+    viz: 10,           // малювати кожну vi-ту частку
+    quant: 5,          // квант простору             
+
+    N: 0,              // поточна кількість куль
+    steps: 0,          // заг. кількість кроків 
+    strikes: 0,        // заг. кількість зіткнень    
+
+    // квантує простір при конструюванні сцен
+    quanty: function(x: number) { return Math.round(x / this.quant) * this.quant;},
+};
+
+export const page = { 
+    canvasElement: <HTMLCanvasElement>document.getElementById('canvas')!,
+    canvas2Element: <HTMLCanvasElement>document.getElementById('canvas2')!,
+
+    noneRadio: <HTMLInputElement>document.getElementById('none')!,
+    ballsRadio: <HTMLInputElement>document.getElementById('balls')!,
+    linesRadio: <HTMLInputElement>document.getElementById('lines')!,
+
+    optionsGloElement: <HTMLInputElement>document.getElementById('options-glo')!,
+    optionsNewElement: <HTMLInputElement>document.getElementById('options-new')!,
+
+    stepButton: <HTMLButtonElement>document.getElementById('step')!,
+    keysSpan: <HTMLSpanElement>document.getElementById('keys')!,
+
+    startProcessButton: <HTMLButtonElement>document.getElementById('start-process-btn')!,
+    pauseProcessButton: <HTMLButtonElement>document.getElementById('pause-process-btn')!,
+
+    processArea: <HTMLTextAreaElement>document.getElementById('process-script')!,
+    imageElement: <HTMLInputElement>document.getElementById('image-json')!,
+
+    footer: <HTMLElement>document.getElementById('footer')!,
+    footer2: <HTMLElement>document.getElementById('footer2')!,
+    pageTitle: <HTMLElement>document.getElementById('page-title')!,
+
+    kindRadios: [<HTMLInputElement>document.getElementById('kind-radio0')!,  
+                <HTMLInputElement>document.getElementById('kind-radio1')!,  
+                <HTMLInputElement>document.getElementById('kind-radio2')!,],
+    kindSpans: [<HTMLSpanElement>document.getElementById('kind-span0')!,
+                <HTMLSpanElement>document.getElementById('kind-span1')!,
+                <HTMLSpanElement>document.getElementById('kind-span2')!],
+    dbArea: <HTMLTextAreaElement>document.getElementById('db')!,
+
+}

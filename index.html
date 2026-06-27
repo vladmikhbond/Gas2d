@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./index.css" />
+        <link rel="icon" href="./favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    </head>
+<body>
+    <h3 id="page-title">Ideal Gas</h3>
+    
+    <div>
+        <span class="states-cont">
+            <label><input type="radio" name="states" value="Balls" id="balls">Gas</label>
+            <label><input type="radio" name="states" value="Lines" id="lines">Walls</label>
+            <label><input type="radio" name="states" value="None" id="none">Devices</label>
+        </span>
+        
+        <input id="options-glo" value="g = 0.1, gBall = 0, cell = 20, viz = 10, quant = 5, metr = 10">
+    </div>
+
+    <span id="confirm"></span>
+
+    <div>
+        <span class="kinds-cont">
+            <label>
+                <input type="radio" name="kinds" value="kind0" id="kind-radio0" checked><span id="kind-span0"></span>
+            </label>
+            <label>
+                <input type="radio" name="kinds" value="kind1" id="kind-radio1"><span id="kind-span1"></span>
+            </label>
+            <label>
+                <input type="radio" name="kinds" value="kind2" id="kind-radio2"><span id="kind-span2"></span>
+            </label>  
+        </span>
+
+        <input id="options-new" >
+        <button id="start-process-btn" class="command">Go</button>
+        <button id="pause-process-btn" class="command" title="Play-Pause">►</button>
+        <button id="step" class="command" title="One Step">1</button>
+        <button id="help" class="command" onclick="window.open('help.html');">Help</button>
+    </div>
+    <div> 
+        <textarea id="process-script" spellcheck="false" title="Вікно команд">
+load: Norm
+run:             
+        </textarea>
+    </div>
+
+    <canvas id="canvas" width="400" height="500" tabindex="0"></canvas>
+    <canvas id="canvas2" width="350" height="500" tabindex="0"></canvas>
+    
+    <div class="footer">
+        <span id="footer"></span>
+        <span id="footer2"></span>        
+    </div>   
+    
+    <div> 
+        <input id="image-json" />
+    </div>
+
+    <textarea id="db" spellcheck="false">
+
+title:         Цикл Отто (бензиновий)
+load: otto_plunger
+scale:         P=0.16, T=-1, S=0.33, X=0.12
+intake:                v=90000
+compression: m=8500,   v=12000
+ignition:    rate=1.5, t=2000
+expansion:   m=16000,  v=88000
+exhaust:     m=1000,   v=8000 
+
+
+title:   Цикл Брайтона (квазістаціонарний)
+plunger: m=3000, T=111.4
+scale:   P=5.5, T=9.2, S=0.36, X=1.5
+isobaric:  dir=inc, v=36000 
+adiabatic: dir=inc, m=550
+isobaric:  dir=dec, v=57000 
+adiabatic: dir=dec, m=3000            
+
+
+title:   Зворотний цикл Брайтона
+plunger: m=3000, T=111.4
+scale:   P=5.5, T=9.2, S=0.36, X=1.5
+adiabatic: dir=inc, m=550
+isobaric:  dir=inc, v=86000 
+adiabatic: dir=dec, m=3000 
+isobaric:  dir=dec, v=24700 
+    
+
+title:   Цикл Карно
+plunger: m=3000, T=126
+scale:   P=6, T=10, S=0.7, X=1.6
+isothermic: dir=inc, m=1600
+adiabatic:  dir=inc, m=600
+isothermic: dir=dec, m=1100
+adiabatic:  dir=dec, m=3000
+
+
+title:   Зворотний цикл Карно
+plunger: m=3000, T=126
+scale:   P=6, T=10, S=0.7, X=1.6
+adiabatic:  dir=inc, m=1100
+isothermic: dir=inc, m=600
+adiabatic:  dir=dec, m=1600
+isothermic: dir=dec, m=3000
+
+
+title:   Цикл Отто (квазістаціонарний)
+plunger: m=3000, T=126
+scale:   P=6, T=11, S=0.33, X=1.6
+adiabatic: dir=inc, m=1000
+isohoric:  dir=dec, m=300
+adiabatic: dir=dec, m=900
+isohoric:  dir=inc, m=3000
+
+
+title:   Зворотний цикл Отто (квазістаціонарний)
+plunger: m=3000, T=126
+scale:   P=6, T=11, S=0.33, X=1.6
+isohoric:  dir=dec, m=900
+adiabatic: dir=inc, m=300
+isohoric:  dir=inc, m=1000
+adiabatic: dir=dec, m=3000
+
+
+
+PV=C: '{"bombs":[{"n":5000,"x1":107,"x2":294,"y1":347,"y2":432,"vx":0,"vy":0,"t":100,"r":0.25,"m":1,"c":"red"}],"lines":[{"x1":100,"y1":440,"x2":300,"y2":440,"c":"blue"},{"x1":100,"y1":40,"x2":100,"y2":440,"c":"blue"},{"x1":100,"y1":40,"x2":300,"y2":40,"c":"blue"},{"x1":300,"y1":40,"x2":300,"y2":440,"c":"blue"},{"x1":100,"y1":340,"x2":320,"y2":340,"c":"blue"},{"x1":100,"y1":240,"x2":320,"y2":240,"c":"blue"}],"plungers":[],"devices":[{"x1":100,"y1":340,"x2":300,"y2":440,"type":"m","rate":0,"color":"","shift":0}],"glo":{"g":0.1,"gBall":0,"cell":20,"viz":10,"quant":5,"metr":10}}',
+
+Norm: '{"bombs":[{"n":4000,"x1":107,"x2":288,"y1":126,"y2":304,"vx":0,"vy":0,"t":300,"r":0.25,"m":1,"c":"red"}],"lines":[{"x1":100,"y1":320,"x2":300,"y2":320,"c":"blue"},{"x1":100,"y1":120,"x2":100,"y2":320,"c":"blue"},{"x1":100,"y1":120,"x2":300,"y2":120,"c":"blue"},{"x1":300,"y1":120,"x2":300,"y2":320,"c":"blue"}],"plungers":[],"devices":[{"x1":100,"y1":120,"x2":300,"y2":320,"type":"m","rate":0,"color":"","shift":0}],"glo":{"g":0.1,"gBall":0,"cell":20,"viz":10,"quant":5,"metr":10}}',
+
+MFP:  '{"bombs":[{"n":5000,"x1":100,"x2":300,"y1":100,"y2":440,"vx":0,"vy":0,"t":1000,"r":0.0625,"m":1,"c":"red"}],"lines":[{"x1":100,"y1":440,"x2":300,"y2":440,"c":"black"},{"x1":100,"y1":80,"x2":100,"y2":440,"c":"black"},{"x1":300,"y1":80,"x2":300,"y2":440,"c":"black"}],"plungers":[{"x1":100,"y1":80,"x2":300,"y2":440,"v":68000,"m":5000}],"devices":[],"devices":[{"x1":100,"y1":245,"x2":300,"y2":440,"type":"m","rate":0}],"glo":{"g":0.1, "gBall":0, "cell":20, "viz":10, "quant":5, "metr":10}}',
+    
+otto_plunger: '{"bombs":[],"lines":[{"x1":100,"y1":480,"x2":300,"y2":480,"c":"blue"},{"x1":100,"y1":20,"x2":100,"y2":480,"c":"blue"},{"x1":100,"y1":20,"x2":300,"y2":20,"c":"blue"},{"x1":300,"y1":20,"x2":300,"y2":480,"c":"blue"}],"plungers":[{"x1":100,"y1":20,"x2":300,"y2":480,"v":8000,"m":100}],"devices":[],"glo":{"g":0.1,"gBall":0,"cell":20,"viz":10,"quant":5,"metr":1}}',
+
+
+Carn: '{"bombs":[{"n":4000,"x1":100,"y1":420,"x2":300,"y2":480,"r":0.5,"m":1,"c":"red","t":126}],"lines":[{"x1":100,"y1":480,"x2":300,"y2":480,"c":"blue"},{"x1":100,"y1":20,"x2":100,"y2":480,"c":"blue"},{"x1":100,"y1":20,"x2":300,"y2":20,"c":"blue"},{"x1":300,"y1":20,"x2":300,"y2":480,"c":"blue"}],"plungers":[{"x1":100,"y1":20,"x2":300,"y2":480,"v":11650,"m":3000}],"devices":[],"glo":{"g":0.1, "gBall":0, "cell":20, "viz":10, "quant":5, "metr":1}}',
+
+Otto: '{"bombs":[],"lines":[{"x1":260,"y1":465,"x2":360,"y2":465,"c":"blue"},{"x1":260,"y1":40,"x2":260,"y2":465,"c":"blue"},{"x1":360,"y1":40,"x2":360,"y2":465,"c":"blue"}],"plungers":[{"x1":260, "y1":40, "x2":360, "y2":465, "v":4000, "m":100}],"devices":[],"glo":{"g":0.1, "gBall":0, "cell":20, "viz":10, "quant":5, "metr":1}}',
+
+Bray: '{"bombs":[{"n":10000,"x1":100, "y1":355, "x2":300, "y2":480, "r":0.5,"m":0.4,"c":"red","t":111.4}],"lines":[{"x1":100,"y1":480,"x2":300,"y2":480,"c":"blue"},{"x1":100,"y1":20,"x2":100,"y2":480,"c":"blue"},{"x1":100,"y1":20,"x2":300,"y2":20,"c":"blue"},{"x1":300, "y1":20, "x2":300, "y2":480, "c":"blue"}],"plungers":[{"x1":100, "y1":20, "x2":300, "y2":480, "v":25000, "m":3000}],"devices":[],"glo":{"g":0.1, "gBall":0, "cell":20, "viz":10, "quant":5, "metr":1}}',
+    </textarea>  
+
+
+
+    <script type="module" src="./js/main.js"></script>
+
+</body>
+</html>

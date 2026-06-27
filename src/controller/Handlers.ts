@@ -1,0 +1,122 @@
+import {DesignerState} from '../globals/utils.js';
+import Space from '../model/Space.js';
+import View from '../view/View.js';
+import Controller from './Controller.js';
+import Ball from '../model/Ball.js';
+import Device from '../model/Device.js';
+import Line from '../model/Line.js';
+import {page} from '../globals/globals.js';
+import {Plunger} from '../model/Plunger.js';
+
+
+export default class Handler {
+    protected currentX = 0;
+    protected currentY = 0;
+    protected isDrawing = false;
+    protected draggingObject: Device | Line | Ball | null = null;
+
+
+    view: View;
+    space: Space;
+    controller: Controller
+    
+    constructor(controller: Controller) {
+        this.controller = controller;
+        this.space = controller.space;
+        this.view = controller.view;
+    
+        page.optionsNewElement.value = this.controller.stateOptions[this.controller.state][0];
+    }
+
+    mousedown(e: MouseEvent) {
+        this.currentX = e.offsetX;
+        this.currentY = e.offsetY;
+        this.isDrawing = true;
+    }
+
+    mousemove(e: MouseEvent) {
+        page.footer2.innerHTML = `${e.offsetX}, ${e.offsetY}`;
+
+        if (!this.isDrawing) {
+            return;
+        }
+        if (this.draggingObject && (this.draggingObject === this.space.selectedLine || this.draggingObject === this.space.selectedDevice)) {
+            let dx = e.offsetX - this.currentX;
+            let dy = e.offsetY - this.currentY;
+            this.currentX = e.offsetX;
+            this.currentY = e.offsetY;
+            this.draggingObject.move(dx, dy);
+            this.view.draw();
+        } else {
+            this.view.draw();
+            this.view.drawGrayRect(this.currentX, this.currentY, e.offsetX, e.offsetY);
+        }
+
+    }
+
+    mouseup(e: MouseEvent) { }
+
+    keydown(e: KeyboardEvent) { 
+        switch (e.key) {
+            case 'P': case 'p': case 'V': case 'v': case 'T': case 't': case 'S': case 's': case 'X': case 'x':
+                // маштабування тиску на PV і TV-діаграмі
+                if (this.space.plunger) {
+                    this.space.plunger.scale(e.key);
+                    this.view.drawMeasure();
+                }
+                break;
+            case '0':
+                // очистити журнал вимірювань
+                if (this.space.plunger) {
+                    this.space.plunger.clearMeterings();
+                    this.view.drawMeasure();
+                }
+                break;
+            case '1': case '2':
+                // встановити ширину лінії графіку
+                if (this.space.plunger) {
+                    this.space.plunger.scales.w = +e.key;
+                    this.view.drawMeasure();
+                }
+                break;
+            case 'f':
+                // зафіксувати-розфіксувати поршень
+                if (this.space.plunger) {
+                    this.space.plunger.fixed = !this.space.plunger.fixed;
+                    this.view.draw();
+                }
+                break;
+
+        }
+    }
+
+
+    selectAndSwithState(x: number, y: number) {
+
+        this.space.selectLine(x, y);
+        this.space.selectBall(x, y);
+        this.space.selectDevice(x, y);
+
+        if (this.space.selectedLine) {
+            page.linesRadio.checked = true;
+            page.linesRadio.dispatchEvent(new InputEvent("change"));
+            return;
+        }
+
+
+        if (this.space.selectedBall) {
+            page.ballsRadio.checked = true;
+            page.ballsRadio.dispatchEvent(new InputEvent("change"));
+            return;
+        }
+
+
+        if (this.space.selectedDevice) {
+            page.noneRadio.checked = true;
+            page.noneRadio.dispatchEvent(new InputEvent("change"));
+            return;
+        }
+    }
+
+
+}

@@ -14,7 +14,7 @@ export default class Space
     deltaSize = 0;  // to reduce checkered effect
 
     time = 0      // такти часу
-
+    cell = 20          // сторона комірки
     givenHeat = 0;      // тепло, віддане усіма нагрівачами
     takenHeat = 0;      // тепло, забране усіма охолоджувачами 
     // підраховує тепло при нагріванні 

@@ -374,7 +374,7 @@ export default class View
         const ctx = this.ctx;
         ctx.strokeStyle = 'gray'; 
         ctx.lineWidth = 0.1;
-        let step = globus.cell;
+        let step = this.space.cell;
 
         ctx.beginPath();
         // Горизонтальні лінії

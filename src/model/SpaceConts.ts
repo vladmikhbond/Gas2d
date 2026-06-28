@@ -3,7 +3,6 @@ import Ball from './Ball.js';
 import Line from './Line.js';
 import Device from './Device.js';
 import {Plunger} from './Plunger.js';
-import {globus} from '../globals/globals.js';
 
 export class BallCont {
 
@@ -14,8 +13,8 @@ export class BallCont {
     {
         this.space = space;
 
-        let nrows = space.height / globus.cell | 0 || 1;
-        let ncols = space.width  / globus.cell | 0 || 1;
+        let nrows = space.height / this.space.cell | 0 || 1;
+        let ncols = space.width  / this.space.cell | 0 || 1;
         let arr: Ball[][][] = new Array(nrows);
         for(let r = 0; r < nrows; r++) {
             arr[r] = new Array(ncols);
@@ -27,11 +26,11 @@ export class BallCont {
     }
 
     population(point:  {x: number, y: number}): Ball[] {
-        let row = point.y / globus.cell | 0;
+        let row = point.y / this.space.cell | 0;
         if (row < 0) row = 0;
         if (row >= this.arr.length) row = this.arr.length - 1;
 
-        let col = point.x / globus.cell | 0;
+        let col = point.x / this.space.cell | 0;
         if (col < 0) col = 0;
         if (col >= this.arr[row].length) col = this.arr[row].length - 1;
         

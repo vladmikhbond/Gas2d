@@ -7,7 +7,7 @@ import { WallCont, BallCont, DevCont } from './SpaceConts.js';
 import Bomb from './Bomb.js';
 import { Heater } from './Heaters.js';
 
-export enum TimeMode {Stop, Play};
+// export enum TimeMode {Stop, Play};
 export enum CreateMode {Info, Gas, Wall, Devs};
 
 export default class Space 

@@ -1,5 +1,5 @@
 import {globus, page} from '../globals/globals.js';
-import Space from '../model/Space.js';
+import Space, { CreateMode } from '../model/Space.js';
 import View from '../view/View.js';
 import { Options, DesignerState} from '../globals/utils.js';
 import Handler from './Handlers.js';
@@ -23,6 +23,8 @@ export default class Controller
 
     timer: ReturnType<typeof setInterval> | 0 = 0;
 
+    private _createMode = CreateMode.Gas;
+
     constructor(space: Space, view: View) 
     {
         this.space = space;
@@ -41,18 +43,45 @@ export default class Controller
         page.linesRadio.dispatchEvent(new Event("change"));
         
         this.startFooter();
+
+        this.createMode = CreateMode.Gas;
     }
 
-        setModelSize() {
-            let [w, h] = [this.space.width, this.space.height];
-            document.documentElement.style.setProperty('--canvas-width', w+'px');
-            document.documentElement.style.setProperty('--canvas-height', h+'px');
-            // document.getElementById("savedSceneText")!.style.width = (w - 125)+'px';             
-            page.canvas.height = h;
-            page.canvas.width = w;
-            page.canvas2.height = h;
-            page.canvas2.width = w;
+    set createMode(value: CreateMode) 
+    {
+        this._createMode = value;
+        switch(value) {
+            case CreateMode.Info:
+                break;
+            case CreateMode.Gas:
+                this.switchHandlers(this.ballHandler);
+                break;
+            case CreateMode.Wall:
+                this.switchState(DesignerState.Lines);
+                break;
+            case CreateMode.Devs:
+                this.switchState(DesignerState.Devices)
+                break;
         }
+
+        
+    }
+
+    get createMode() {
+        return this._createMode;
+    }
+
+
+    setModelSize() {
+        let [w, h] = [this.space.width, this.space.height];
+        document.documentElement.style.setProperty('--canvas-width', w+'px');
+        document.documentElement.style.setProperty('--canvas-height', h+'px');
+        // document.getElementById("savedSceneText")!.style.width = (w - 125)+'px';             
+        page.canvas.height = h;
+        page.canvas.width = w;
+        page.canvas2.height = h;
+        page.canvas2.width = w;
+    }
 
     private bindHandlers() {
 
@@ -78,7 +107,6 @@ export default class Controller
                 }
             }      
         });
-
 
         page.ballsRadio.addEventListener("change", () => {
             if (!page.ballsRadio.checked)
@@ -140,11 +168,7 @@ export default class Controller
         ['c = blue', 'c = black' ]];
 
 
-    // stateKeyHints: string[] = [
-    //     '<b>Keys:</b> Del, ctrl-c, ctrl-v, arrows, s, Pp,Tt,Ee,Vv,Xx 0, f, 1,2',
-    //     '<b>Keys:</b> Del, ctrl-c, ctrl-v, Pp,Tt,Ee,Vv,Xx 0, f, 1,2',
-    //     '<b>Keys:</b> Del, ctrl-c, ctrl-v, arrows, +,-, Pp,Tt,Ee,Vv,Xx 0, f, 1,2', ];
-    
+
 
     stateRadioSpans: string[][] = [
         ['Meter', 'Heater'],     

@@ -38,7 +38,7 @@ export default class Controller
         this.bindHandlers()
         this.setModelSize();
         this.createMode = CreateMode.Gas;
-        
+
         this.startFooter();
 
         
@@ -54,12 +54,25 @@ export default class Controller
                 this.switchHandlers(this.ballHandler);
                 break;
             case CreateMode.Wall:
-                this.switchState(DesignerState.Lines);
+                this.switchHandlers(this.lineHandler);
                 break;
             case CreateMode.Devs:
-                this.switchState(DesignerState.Devices)
+                this.switchHandlers(this.deviceHandler);
                 break;
         }
+
+            // let sb = document.getElementById("ballParams")!.style;
+            // let sl = document.getElementById("lineParams")!.style;
+            // let sk = document.getElementById("linkParams")!.style;
+            // sb.display = sl.display = sk.display = 
+
+            // document.getElementById("ballParams")!.style.display = "none";
+            // switch (this.createMode) {
+            //     case CreateMode.Ball: sb.display = "inline"; break;
+            //     case CreateMode.Line: sl.display = "inline"; break;
+            //     case CreateMode.Link: sk.display = "inline"; break;
+            //     default: break;
+            // }         
 
         
     }
@@ -105,55 +118,24 @@ export default class Controller
             }      
         });
 
-        // page.ballsRadio.addEventListener("change", () => {
-        //     if (!page.ballsRadio.checked)
-        //         return;
-        //     this.switchState(DesignerState.Balls);
-        // });
-
-        // page.linesRadio.addEventListener("change", () => {
-        //     if (!page.linesRadio.checked)
-        //         return;
-        //     this.switchState(DesignerState.Lines);
-        // });
-
-        // page.noneRadio.addEventListener("change", () => {
-        //     if (!page.noneRadio.checked)
-        //         return;
-        //     this.switchState(DesignerState.Devices);
-        // });
-
-        page.kindRadios[0].addEventListener("change", () => {
-            this.switchSubstate(0);
-        });
-        
-        page.kindRadios[1].addEventListener("change", () => {
-            this.switchSubstate(1)
-        });
+        // Set Create Mode
+        document.getElementById("createMode")!.addEventListener("change", (e: Event) =>
+        {
+            let str = (e.target as HTMLSelectElement).value;
+            const key = str as keyof typeof CreateMode;
+            this.createMode = CreateMode[key];            
+        }); 
 
         document.getElementById('pause-process-btn')!.addEventListener('click', () => {
             if (this.timer == 0) 
                 this.run();
             else
                 this.stop();
-        })
+        });
 
         page.stepButton.addEventListener('click', () => {
             this.step();
-        })
-
-        // page.optionsGloElement.addEventListener("change", () => {
-        //     let o = Options.str2obj(page.optionsGloElement.value);
-        //     Object.assign(globus, o);
-        // });
-
-
-        // page.canvas2Element.addEventListener("mousemove", (e) => {
-        //    const plunger = this.space.plunger;
-        //    if (!plunger) return;
-        //    this.view.showFooter2(plunger, e.offsetX, e.offsetY);
-            
-        // });
+        });
 
     } 
     
@@ -173,57 +155,57 @@ export default class Controller
         ['Rectangle', 'Plunger']];
     
 
-    private switchState(newState: DesignerState) 
-    {
-        // switch Handlers
-        switch (newState) {
-            case DesignerState.Balls:
-                this.switchHandlers(this.ballHandler);
-                break;
-            case DesignerState.Lines:
-                this.switchHandlers(this.lineHandler);
-                break;
-            case DesignerState.Devices:
-                this.switchHandlers(this.deviceHandler);
-                break;
-        }
-        // save previous opts
-        this.stateOptions[this.state][this.substate] = page.optionsNewElement.value
-        this.state = newState;
-        // restore current opts
-        page.optionsNewElement.value = this.stateOptions[this.state][this.substate];
+    // private switchState(newState: DesignerState) 
+    // {
+    //     // switch Handlers
+    //     switch (newState) {
+    //         case DesignerState.Balls:
+    //             this.switchHandlers(this.ballHandler);
+    //             break;
+    //         case DesignerState.Lines:
+    //             this.switchHandlers(this.lineHandler);
+    //             break;
+    //         case DesignerState.Devices:
+    //             this.switchHandlers(this.deviceHandler);
+    //             break;
+    //     }
+    //     // save previous opts
+    //     this.stateOptions[this.state][this.substate] = page.optionsNewElement.value
+    //     this.state = newState;
+    //     // restore current opts
+    //     page.optionsNewElement.value = this.stateOptions[this.state][this.substate];
 
-        // change radio buttons UI
+    //     // change radio buttons UI
 
-        let kindValues =  this.stateRadioSpans[newState];
-        for (let i = 0; i < 3; i++) {
-            const radio = page.kindRadios[i];
-            const span = page.kindSpans[i];
-            if (i < kindValues.length) {  
-                const text = kindValues[i];
-                span.innerText = text;
-                radio.dataset.val = i.toString();
-                radio.style.display = span.style.display = 'inline';
-            } else {
-                radio.style.display = span.style.display = 'none';
-            }
-        }
-        let substate = 0;
-        this.substate = substate;
-        page.kindRadios[substate].checked = true;
-        page.optionsNewElement.value = this.stateOptions[this.state][substate];
-    };
+    //     let kindValues =  this.stateRadioSpans[newState];
+    //     for (let i = 0; i < 3; i++) {
+    //         const radio = page.kindRadios[i];
+    //         const span = page.kindSpans[i];
+    //         if (i < kindValues.length) {  
+    //             const text = kindValues[i];
+    //             span.innerText = text;
+    //             radio.dataset.val = i.toString();
+    //             radio.style.display = span.style.display = 'inline';
+    //         } else {
+    //             radio.style.display = span.style.display = 'none';
+    //         }
+    //     }
+    //     let substate = 0;
+    //     this.substate = substate;
+    //     page.kindRadios[substate].checked = true;
+    //     page.optionsNewElement.value = this.stateOptions[this.state][substate];
+    // };
 
 
-    private switchSubstate(newSubstate: number) {
-        if (page.kindRadios[newSubstate].checked) {
-            // save previous opts
-            this.stateOptions[this.state][this.substate] = page.optionsNewElement.value
-            this.substate= newSubstate;
-            // restore current opts
-            page.optionsNewElement.value = this.stateOptions[this.state][this.substate];
-        }      
-    } 
+    // private switchSubstate(newSubstate: number) {
+    //     if (page.kindRadios[newSubstate].checked) {
+    //         // save previous opts
+    //         this.stateOptions[this.state][this.substate] = page.optionsNewElement.value
+    //         this.substate= newSubstate;
+    //         // restore current opts
+    //         page.optionsNewElement.value = this.stateOptions[this.state][this.substate];
+    //     }      
+    // } 
     
 
     private switchHandlers(handler: Handler)  {

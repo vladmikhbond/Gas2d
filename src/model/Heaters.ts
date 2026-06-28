@@ -13,8 +13,8 @@ export class Heater extends Device
 
    get avatar() {return "H"}
 
-   warm(k: number = 0) {
-      if (!k) k = this.rate;
+   warm() {
+      const k = this.rate;
 
       for (let ball of this.space!.balls()) 
       {

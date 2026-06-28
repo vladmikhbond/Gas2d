@@ -5,6 +5,7 @@ import Line from '../model/Line.js';
 import {Plunger} from '../model/Plunger.js';
 import Handler from './Handlers.js';
 import {globus, page} from '../globals/globals.js';
+import { getWallParams } from './params.js';
 
 
 export default class LineHandler extends Handler {
@@ -41,18 +42,16 @@ export default class LineHandler extends Handler {
         if (x2 - x1 < globus.quant && y2 - y1 < globus.quant) {
             this.selectAndSwithState(x1, y1);
         } else {
-            let o = Options.str2obj(page.optionsNewElement.value);
-            o['shape'] = getKindValue();
-
+            const t = getWallParams();
             // якщо прямокутник занадто плаский, додавати лінію
             if (Math.abs(y1 - y2) < globus.quant) {
-                this.space.addLine(new Line(x1, y1, x2, y1, o.c));
+                this.space.addLine(new Line(x1, y1, x2, y1, "blue"));
             } else if (Math.abs(x1 - x2) < globus.quant) {
-                this.space.addLine(new Line(x1, y1, x1, y2, o.c));
-            } else if (o.shape == "0") {
-                this.space.addRect(x1, y1, x2, y2, o.c);                
-            } else if (o.shape == "1") {
-                this.space.addPlunger(x1, y1, x2, y2, o.c);
+                this.space.addLine(new Line(x1, y1, x1, y2, "blue"));
+            } else if (t == 'r') {
+                this.space.addRect(x1, y1, x2, y2, "blue" );                
+            } else if (t == 'p') {
+                this.space.addPlunger(x1, y1, x2, y2, "blue");
             }          
         }
         this.view.draw();

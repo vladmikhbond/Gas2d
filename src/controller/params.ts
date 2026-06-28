@@ -1,3 +1,4 @@
+type N1 = [number];
 type N2 = [number, number];
 type N4 = [number, number, number, number];
 
@@ -78,6 +79,27 @@ export function getGasParams(): N4 | null
 
     paramsElement.style.backgroundColor = "";
     return ps;
+}
+
+export function getWallParams(): string | null 
+{
+    const paramsElement = (document.getElementById("wallParams") as HTMLInputElement)!;
+    let t: string | null ;
+    try {
+        t = (new Function("", 
+            "let type;" + 
+            paramsElement.value + 
+            "; return type" 
+        ))();
+    } catch {
+        return errMesage("Grammar error", paramsElement);
+    }
+    // validation
+    if (!t || t != 'r' && t != 'p' )
+        return errMesage("type = 'r'|'p'", paramsElement);
+ 
+    paramsElement.style.backgroundColor = "";
+    return t;
 }
 
 

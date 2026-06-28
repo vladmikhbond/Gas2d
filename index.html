@@ -27,18 +27,15 @@
               <option value="Gas" selected >Gas</option>
               <option value="Wall">Wall</option>
               <option value="Devs">Devs</option>
-          </select>     
+          </select>
+          
+          <input id="gasParams" type="text" value="n=100; r=1; t=100; m=1 " >
+          <input id="wallParams" type="text" value="type='r'" title="type='r[ectangle]'|'p[lunger]'" >
+          <input id="devsParams" type="text" value="c = 'red', s = 0" >
+
     </section>
 <!-- ============================================= -->
-    <div>
-        <span class="states-cont">
-            <label><input type="radio" name="states" value="Balls" id="balls">Gas</label>
-            <label><input type="radio" name="states" value="Lines" id="lines">Walls</label>
-            <label><input type="radio" name="states" value="None" id="none">Devices</label>
-        </span>
-        
-        <input id="options-glo" value="g = 0.1, gBall = 0, cell = 20, viz = 10, quant = 5, metr = 10">
-    </div>
+    
 
     <span id="confirm"></span>
 

@@ -4,6 +4,7 @@ import Bomb from '../model/Bomb.js'
 import { Options, confirmAction,} from '../globals/utils.js';
 import Controller from './Controller.js';
 import Handler from './Handlers.js';
+import { getGasParams } from './params.js';
 
 const CLICK_DIST = 3;
 
@@ -51,16 +52,11 @@ export default class BallHandler extends Handler {
         if (drawDist <= CLICK_DIST) {
             this.selectAndSwithState(x1, y1);
         } else {
-            if (0 == this.controller.substate) {
-                // Determine
-                this.space.addBomb(new Bomb(o.n, x1, y1, x2, y2, o.vx, o.vy, 0, o.r, o.m, o.c));
-            } else if (1 == this.controller.substate) {
-                // Random
-                this.space.addBomb(new Bomb(o.n, x1, y1, x2, y2, 0, 0, o.t, o.r, o.m, o.c));
-            } 
- 
-            let bomb = new Bomb(o.n,x1, y1, x2, y2, 0, 0, o.t, o.r, o.m, o.c);
-            (bomb);
+            let ps = getGasParams();
+            if (ps) {
+                const [n, r, t, m] = ps;
+                this.space.addBomb(new Bomb(n, x1, y1, x2, y2, 0, 0, t, r, m, "red"));
+            }
         }
         this.view.draw();  
     }

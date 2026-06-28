@@ -1,5 +1,5 @@
 type N2 = [number, number];
-type N5 = [number, number, number, number, number];
+type N4 = [number, number, number, number];
 
 export function getSizeParams(): N2 | null
 {
@@ -51,6 +51,35 @@ export function getSpaceParams(): N2 | null
     paramsElement.style.backgroundColor = "";
     return ps;
 }
+
+export function getGasParams(): N4 | null
+{
+    const paramsElement = (document.getElementById("gasParams") as HTMLInputElement)!;
+    let ps: N4;
+    try {
+        ps = (new Function("", 
+            "let n, r, t, m;" + 
+            paramsElement.value + 
+            "; return [n, r, t, m]" 
+        ))();
+    } catch {
+        return errMesage("Grammar error", paramsElement);
+    }
+    // перевірки
+    const [n, r, t, m] = ps;
+    if (n == undefined || n < 0) 
+        return errMesage("n: n > 0", paramsElement);
+    if (r == undefined || r < 0) 
+        return errMesage("r: r > 0", paramsElement);
+    if (t == undefined || t < 0) 
+        return errMesage("t: t > 0", paramsElement);
+    if (m == undefined || m < 0) 
+        return errMesage("m: m > 0", paramsElement);
+
+    paramsElement.style.backgroundColor = "";
+    return ps;
+}
+
 
 
 function errMesage(mes: string, el: HTMLInputElement) {

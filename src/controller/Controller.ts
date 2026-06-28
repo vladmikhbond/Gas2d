@@ -37,14 +37,11 @@ export default class Controller
         
         this.bindHandlers()
         this.setModelSize();
-
-        // switch state to State.Lines
-        page.linesRadio.checked = true; 
-        page.linesRadio.dispatchEvent(new Event("change"));
+        this.createMode = CreateMode.Gas;
         
         this.startFooter();
 
-        this.createMode = CreateMode.Gas;
+        
     }
 
     set createMode(value: CreateMode) 
@@ -108,23 +105,23 @@ export default class Controller
             }      
         });
 
-        page.ballsRadio.addEventListener("change", () => {
-            if (!page.ballsRadio.checked)
-                return;
-            this.switchState(DesignerState.Balls);
-        });
+        // page.ballsRadio.addEventListener("change", () => {
+        //     if (!page.ballsRadio.checked)
+        //         return;
+        //     this.switchState(DesignerState.Balls);
+        // });
 
-        page.linesRadio.addEventListener("change", () => {
-            if (!page.linesRadio.checked)
-                return;
-            this.switchState(DesignerState.Lines);
-        });
+        // page.linesRadio.addEventListener("change", () => {
+        //     if (!page.linesRadio.checked)
+        //         return;
+        //     this.switchState(DesignerState.Lines);
+        // });
 
-        page.noneRadio.addEventListener("change", () => {
-            if (!page.noneRadio.checked)
-                return;
-            this.switchState(DesignerState.Devices);
-        });
+        // page.noneRadio.addEventListener("change", () => {
+        //     if (!page.noneRadio.checked)
+        //         return;
+        //     this.switchState(DesignerState.Devices);
+        // });
 
         page.kindRadios[0].addEventListener("change", () => {
             this.switchSubstate(0);
@@ -145,10 +142,10 @@ export default class Controller
             this.step();
         })
 
-        page.optionsGloElement.addEventListener("change", () => {
-            let o = Options.str2obj(page.optionsGloElement.value);
-            Object.assign(globus, o);
-        });
+        // page.optionsGloElement.addEventListener("change", () => {
+        //     let o = Options.str2obj(page.optionsGloElement.value);
+        //     Object.assign(globus, o);
+        // });
 
 
         // page.canvas2Element.addEventListener("mousemove", (e) => {

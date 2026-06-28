@@ -1,13 +1,35 @@
 ﻿<!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="./index.css" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gas2d</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">   
+        <link rel="stylesheet" href="index.css">        
+
         <link rel="icon" href="./favicon.ico" type="image/x-icon">
 		<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     </head>
 <body>
-    <h3 id="page-title">Ideal Gas</h3>
-    
+<main class="container">
+    <h1>
+        Gas 2d 
+        <span id="time"></span> 
+        <span id="info"> </span> 
+    </h1>
+    <!------------------ top panel ---------------->
+    <section>
+          <input id="sizeParams" type="text" value="W=1024; H=700">
+          <input id="spaceParams" type="text" value="k=100; w=0; u=0; v=0; g=0.005"  style="width: 350px;" >
+
+          <select id="createMode" aria-label="Select" required>
+              <option value="Info">Info</option>
+              <option value="Gas" selected >Gas</option>
+              <option value="Wall">Line</option>
+              <option value="Devs">Link</option>
+          </select>     
+    </section>
+<!-- ============================================= -->
     <div>
         <span class="states-cont">
             <label><input type="radio" name="states" value="Balls" id="balls">Gas</label>
@@ -38,26 +60,22 @@
         <button id="step" class="command" title="One Step">1</button>
         <button id="help" class="command" onclick="window.open('help.html');">Help</button>
     </div>
-    <div> 
-        <textarea id="process-script" spellcheck="false" title="Вікно команд">
-load: Norm
-run:             
-        </textarea>
-    </div>
 
-    <canvas id="canvas" width="400" height="500" tabindex="0"></canvas>
+          <!-- ------------------canvases------------------  -->
+      <div class="canvas-frame">
+        <canvas id="canvas2" tabindex="0"></canvas>
+        <canvas id="canvas" width="600" height="400"></canvas>
+      </div>
+
     
     <div class="footer">
         <span id="footer"></span>
         <span id="footer2"></span>        
     </div>   
     
-    <div> 
-        <input id="image-json" />
-    </div>
 
-    <textarea id="db" spellcheck="false">    </textarea>  
     <script type="module" src="main.js"></script>
 
+</main>
 </body>
 </html>

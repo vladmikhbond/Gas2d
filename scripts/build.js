@@ -27,8 +27,8 @@ async function run() {
 
   await copy(path.join(root, "index.html"), path.join(outDir, "index.html"));
   await copy(path.join(root, "index.css"), path.join(outDir, "index.css"));
-  await copy(path.join(root, "help.html"), path.join(outDir, "help.html"));
-  await copy(path.join(root, "help.css"), path.join(outDir, "help.css"));
+  // await copy(path.join(root, "help.html"), path.join(outDir, "help.html"));
+  // await copy(path.join(root, "help.css"), path.join(outDir, "help.css"));
 }
 
 run().catch((err) => {

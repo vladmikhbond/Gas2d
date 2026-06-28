@@ -19,7 +19,7 @@ export default class View
 
     constructor(space: Space) {
         this.space = space;
-        this.ctx = (<HTMLCanvasElement>page.canvasElement!).getContext("2d")!;             
+        this.ctx = (<HTMLCanvasElement>page.canvas!).getContext("2d")!;             
     }
 
 //#region Canvas1  
@@ -27,7 +27,7 @@ export default class View
     draw() {   
         const ctx = this.ctx;
         const space = this.space;
-        ctx.clearRect(0, 0, page.canvasElement.width, page.canvasElement.height);
+        ctx.clearRect(0, 0, page.canvas.width, page.canvas.height);
         
         // grid
         this.drawGrayGrid();
@@ -273,8 +273,8 @@ export default class View
     
     private X = 5;
     private Y = 30;
-    private W = page.canvasElement.width - 10;
-    private H = page.canvasElement.height - this.Y - 5;
+    private W = page.canvas.width - 10;
+    private H = page.canvas.height - this.Y - 5;
 
 
     // drawPlungerMeters(plun: Plunger) {

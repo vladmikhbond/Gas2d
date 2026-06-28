@@ -6,6 +6,7 @@ import Handler from './Handlers.js';
 import BallHandler from './BallHandler.js';
 import LineHandler from './LineHandler.js';
 import DeviceHandler from './DeviceHandler.js';
+import { getSizeParams, getSpaceParams } from './params.js';
 
 
 export default class Controller 
@@ -33,6 +34,7 @@ export default class Controller
         globus.strikes = 0;
         
         this.bindHandlers()
+        this.setModelSize();
 
         // switch state to State.Lines
         page.linesRadio.checked = true; 
@@ -41,7 +43,43 @@ export default class Controller
         this.startFooter();
     }
 
+        setModelSize() {
+            let [w, h] = [this.space.width, this.space.height];
+            document.documentElement.style.setProperty('--canvas-width', w+'px');
+            document.documentElement.style.setProperty('--canvas-height', h+'px');
+            // document.getElementById("savedSceneText")!.style.width = (w - 125)+'px';             
+            page.canvas.height = h;
+            page.canvas.width = w;
+            page.canvas2.height = h;
+            page.canvas2.width = w;
+        }
+
     private bindHandlers() {
+
+        // Size params changed 
+        document.getElementById("sizeParams")!.addEventListener("keydown", (e: KeyboardEvent) => 
+        {
+            if (e.key == "Enter") {
+                const size = getSizeParams();
+                if (size) {
+                    [this.space.width, this.space.height] = size;
+                    this.setModelSize();
+                }
+            }                
+        }); 
+
+        // Space params changed
+        document.getElementById("spaceParams")!.addEventListener("keydown", (e: KeyboardEvent) => 
+        {
+            if (e.key == "Enter") {
+                const ps = getSpaceParams();
+                if (ps) {
+                    [globus.g, globus.gBall] = ps!;                
+                }
+            }      
+        });
+
+
         page.ballsRadio.addEventListener("change", () => {
             if (!page.ballsRadio.checked)
                 return;
@@ -168,10 +206,10 @@ export default class Controller
     
 
     private switchHandlers(handler: Handler)  {
-        page.canvasElement.onmousedown = (e) => handler.mousedown(e);
-        page.canvasElement.onmousemove = (e) => handler.mousemove(e);
-        page.canvasElement.onmouseup = (e) => handler.mouseup(e);
-        page.canvasElement.onkeydown = (e) => handler.keydown(e);
+        page.canvas.onmousedown = (e) => handler.mousedown(e);
+        page.canvas.onmousemove = (e) => handler.mousemove(e);
+        page.canvas.onmouseup = (e) => handler.mouseup(e);
+        page.canvas.onkeydown = (e) => handler.keydown(e);
         // page.canvas2Element.onkeydown = (e) => handler.keydown(e);
     }
 

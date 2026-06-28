@@ -3,7 +3,7 @@
 // На сторінці:   "g = 0.1, gBall = 0, cell = 20, viz = 10, quant = 5, loss = 0, metr = 1"
 export const globus = 
 {
-    // STEP_PERIOD: 20,   // мінім. період одного кроку
+
     BOLTZ: 1/30, // 0.005,       // стала Больцмана (в житті = 1.380649e−23) // was 1/30
 
     g: 0.1,            // сила тяжіння
@@ -17,7 +17,8 @@ export const globus =
 };
 
 export const page = { 
-    canvasElement: <HTMLCanvasElement>document.getElementById('canvas')!,
+    canvas: <HTMLCanvasElement>document.getElementById('canvas'),
+    canvas2: <HTMLCanvasElement>document.getElementById('canvas2'),
 
     noneRadio: <HTMLInputElement>document.getElementById('none')!,
     ballsRadio: <HTMLInputElement>document.getElementById('balls')!,

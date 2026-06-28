@@ -11,9 +11,10 @@ export default class Space
 {
     width: number;
     height: number;
-    deltaSize = 0;  // to reduce checkered effect
 
-    time = 0      // такти часу
+    N = 0              // поточна кількість куль
+
+    time = 0           // такти часу
     cell = 20          // сторона комірки
     givenHeat = 0;      // тепло, віддане усіма нагрівачами
     takenHeat = 0;      // тепло, забране усіма охолоджувачами 
@@ -176,14 +177,14 @@ export default class Space
         
         // всі кулі роблять крок (з перекладанням до нового контейнеру тих, що зосталися в полі зору) 
         const cont = new BallCont(this);
-        globus.N = 0;
+        this.N = 0;
         globus.strikes = 0;
               
         for (let ball of this.balls()) {
             ball.step();            
             if (ball.x >= 0 && ball.x <= this.width && ball.y >= 0 && ball.y <= this.height) {
                 cont.add(ball);
-                globus.N++;
+                this.N++;
             }
         }        
         this.bcont = cont;  

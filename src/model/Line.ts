@@ -1,5 +1,6 @@
 import {distToInfiniteLine, inside} from './Geometry.js'
 import {globus} from '../globals/globals.js';
+import { quanty } from '../globals/utils.js';
 
 export default class Line {
     x1: number;
@@ -13,7 +14,7 @@ export default class Line {
         // нормалізація і квантифікація
         if (x1 > x2) [x1, x2] = [x2, x1];
         if (y1 > y2) [y1, y2] = [y2, y1];
-        [x1, x2, y1, y2] = [x1, x2, y1, y2].map(x => globus.quanty(x));
+        [x1, x2, y1, y2] = [x1, x2, y1, y2].map(x => quanty(x));
 
         this.x1 = x1; this.y1 = y1; this.x2 = x2; this.y2 = y2; this.c = c;
     }
@@ -48,10 +49,10 @@ export default class Line {
     }
 
     justify() {
-        this.x1 = globus.quanty(this.x1);
-        this.x2 = globus.quanty(this.x2);
-        this.y1 = globus.quanty(this.y1);
-        this.y2 = globus.quanty(this.y2);        
+        this.x1 = quanty(this.x1);
+        this.x2 = quanty(this.x2);
+        this.y1 = quanty(this.y1);
+        this.y2 = quanty(this.y2);        
     }
     
     // virtuals for Plunger

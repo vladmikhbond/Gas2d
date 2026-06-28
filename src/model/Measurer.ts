@@ -77,7 +77,7 @@ export class Measurer extends Device
             sumPath += ((ball.x - ball.prevX)**2 + (ball.y - ball.prevY)**2) ** 0.5;            
          }
       }
-      let strikes = globus.strikes * ballCount / globus.N;
+      let strikes = 1; // globus.strikes * ballCount / this.space.N;  //todo
       this.meanFreePath = sumPath / (2 * strikes);
 
       let metering: Metering = {

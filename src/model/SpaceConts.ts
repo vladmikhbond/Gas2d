@@ -6,7 +6,7 @@ import {Plunger} from './Plunger.js';
 
 export class BallCont {
 
-    private arr: Ball[][][];
+    private arr: Ball[][][];  // [r][c][]
     private space: Space;
 
     constructor(space: Space) 

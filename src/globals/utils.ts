@@ -1,3 +1,4 @@
+import {globus} from '../globals/globals.js';
 
 export enum DesignerState {
     Devices,
@@ -5,10 +6,16 @@ export enum DesignerState {
     Lines
 }
 
+// квантує простір при конструюванні сцен
+ export   function quanty (x: number) { 
+    return Math.round(x / globus.quant) * globus.quant;
+}
+
+// Перетворює рядок "x1 = 200, y1 = 0, x2 = 200, y2 = 450, c = blue, "
+// на об'єкт {x1: 200, y1: 0, x2: 200, y2: 450, c: "blue", }
 export class Options 
 {
-    // Перетворює рядок "x1 = 200, y1 = 0, x2 = 200, y2 = 450, c = blue, "
-    // на об'єкт {x1: 200, y1: 0, x2: 200, y2: 450, c: "blue", }
+
     static str2obj(str: string)
     {
         const reg = /([^=]+)=([^=]+)[,;]/g;

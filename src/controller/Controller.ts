@@ -210,13 +210,13 @@ export default class Controller
             let freq = this.space.time - prevSteps;
             prevSteps = this.space.time;
 
-            let strikes = globus.strikes * 100 / globus.N || 0;
+            let strikes = globus.strikes * 100 / this.space.N || 0;
             
             this.view.showFooter({
                 'steps': this.space.time,
                 'freq': freq,
                 'strikes': strikes.toFixed(1) + '%' ,
-                'N': globus.N,
+                'N': this.space.N,
             });            
         }, 1000)
     }

@@ -9,15 +9,11 @@ export const globus =
     g: 0.1,            // сила тяжіння
     gBall: 0,          // чи впливає тяжіння на кулі (0-ні, 1-впливає) 
     metr: 10,          // інтервал між вимірюваннями (у кроках)
-
     quant: 5,          // квант простору             
 
-    N: 0,              // поточна кількість куль
 
     strikes: 0,        // заг. кількість зіткнень    
 
-    // квантує простір при конструюванні сцен
-    quanty: function(x: number) { return Math.round(x / this.quant) * this.quant;},
 };
 
 export const page = { 

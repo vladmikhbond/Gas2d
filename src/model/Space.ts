@@ -190,7 +190,11 @@ export default class Space
                 this.N++;
             }
         }        
-        this.bcont = cont;  
+        this.bcont = cont;
+
+        // зміна швидкості куль від нагріву або охолодження
+        this.warming(); 
+
     }
 
 

@@ -103,6 +103,34 @@ export function getWallParams(): string | null
 }
 
 
+export function getDevsParams(): [string, number, string] | null 
+{
+    const paramsElement = (document.getElementById("devsParams") as HTMLInputElement)!;
+    let ps: [string, number, string] | null ;
+    try {
+        ps = (new Function("", 
+            "let type, r, c;" + 
+            paramsElement.value + 
+            "; return [type, r, c]" 
+        ))();
+    } catch {
+        return errMesage("Grammar error", paramsElement);
+    }
+
+    // validation
+    const [type_, r, c] = ps!;
+    if (type_ == undefined|| type_ != 'm' && type_ != 'h' )
+        return errMesage("type = 'm'[eter] | 'h'[eater]", paramsElement);
+    if (r == undefined || r < 0.9 || r > 1.1 )
+        return errMesage("r: o.9 < r < 1.1", paramsElement);
+    if (c == undefined )
+        return errMesage("c: color", paramsElement);
+
+    paramsElement.style.backgroundColor = "";
+    return ps;
+}
+
+
 
 function errMesage(mes: string, el: HTMLInputElement) {
     alert (mes);

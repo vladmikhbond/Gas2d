@@ -5,6 +5,7 @@ import {Heater} from '../model/Heaters.js';
 import Image from '../data/Image.js';
 import {globus, page} from '../globals/globals.js';
 import Handler from './Handlers.js';
+import { getDevsParams } from './params.js';
 
 
 export default class DeviceHandler extends Handler 
@@ -47,15 +48,15 @@ export default class DeviceHandler extends Handler
         else 
         {
             // create device
-            let o = Options.str2obj(page.optionsNewElement.value);
-            let kind = getKindValue();
-            if (kind == '0') {
-                let color = <string> o.c ?? '';
-                this.space.addDevice(new Measurer(x1, y1, x2, y2, color, o.s));
+            let [t, rate, color] = getDevsParams()!;
+            
+            
+            if (t == 'm') {
+                this.space.addDevice(new Measurer(x1, y1, x2, y2, color));
             } 
-            else if (kind == '1')
+            else if (t == 'h')
             {
-                this.space.addDevice(new Heater(x1, y1, x2, y2, o.rate));                    
+                this.space.addDevice(new Heater(x1, y1, x2, y2, rate));                    
             }
         }
         this.view.draw();    

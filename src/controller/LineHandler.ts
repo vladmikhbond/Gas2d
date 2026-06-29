@@ -4,7 +4,7 @@ import Controller from './Controller.js';
 import Line from '../model/Line.js';
 import {Plunger} from '../model/Plunger.js';
 import Handler from './Handlers.js';
-import {globus, page} from '../globals/globals.js';
+import {glo, page} from '../globals/globals.js';
 import { getWallParams } from './params.js';
 
 
@@ -39,14 +39,14 @@ export default class LineHandler extends Handler {
         let x2 = e.offsetX, y2 = e.offsetY;
         
         // just mouse click
-        if (x2 - x1 < globus.quant && y2 - y1 < globus.quant) {
+        if (x2 - x1 < glo.quant && y2 - y1 < glo.quant) {
             this.selectAndSwithState(x1, y1);
         } else {
             const t = getWallParams();
             // якщо прямокутник занадто плаский, додавати лінію
-            if (Math.abs(y1 - y2) < globus.quant) {
+            if (Math.abs(y1 - y2) < glo.quant) {
                 this.space.addLine(new Line(x1, y1, x2, y1, "blue"));
-            } else if (Math.abs(x1 - x2) < globus.quant) {
+            } else if (Math.abs(x1 - x2) < glo.quant) {
                 this.space.addLine(new Line(x1, y1, x1, y2, "blue"));
             } else if (t == 'r') {
                 this.space.addRect(x1, y1, x2, y2, "blue" );                
@@ -91,25 +91,25 @@ export default class LineHandler extends Handler {
                 break;
             case 'ArrowUp':
                 if (this.space.selectedLine) {
-                    this.space.selectedLine.move(0, -globus.quant);
+                    this.space.selectedLine.move(0, -glo.quant);
                     this.view.draw();
                 }
                 break;
             case 'ArrowDown':
                 if (this.space.selectedLine) {
-                    this.space.selectedLine.move(0, globus.quant);
+                    this.space.selectedLine.move(0, glo.quant);
                     this.view.draw();
                 }
                 break;
             case 'ArrowLeft':
                 if (this.space.selectedLine) {
-                    this.space.selectedLine.move(-globus.quant, 0);
+                    this.space.selectedLine.move(-glo.quant, 0);
                     this.view.draw();
                 }
                 break;
             case 'ArrowRight':
                 if (this.space.selectedLine) {
-                    this.space.selectedLine.move(globus.quant, 0);
+                    this.space.selectedLine.move(glo.quant, 0);
                     this.view.draw();
                 }
                 break;

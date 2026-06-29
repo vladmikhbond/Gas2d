@@ -3,7 +3,7 @@ import Controller from './Controller.js';
 import {Measurer} from '../model/Measurer.js'
 import {Heater} from '../model/Heaters.js';
 import Image from '../data/Image.js';
-import {globus, page} from '../globals/globals.js';
+import {glo, page} from '../globals/globals.js';
 import Handler from './Handlers.js';
 import { getDevsParams } from './params.js';
 
@@ -40,7 +40,7 @@ export default class DeviceHandler extends Handler
         let x2 = e.offsetX, y2 = e.offsetY;
 
         
-        if (x2 - x1 < globus.quant && y2 - y1 < globus.quant) 
+        if (x2 - x1 < glo.quant && y2 - y1 < glo.quant) 
         {
             // just mouse click
             this.selectAndSwithState(x1, y1);

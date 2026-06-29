@@ -1,5 +1,5 @@
 import {distToInfiniteLine, inside} from './Geometry.js'
-import {globus} from '../globals/globals.js';
+import {glo} from '../globals/globals.js';
 import { quanty } from '../globals/utils.js';
 
 export default class Line {
@@ -37,7 +37,7 @@ export default class Line {
     }
 
     get isHor() {
-        return Math.abs(this.y1 - this.y2) < globus.quant;
+        return Math.abs(this.y1 - this.y2) < glo.quant;
     }
         
     move(dx:number, dy: number) {

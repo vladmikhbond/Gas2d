@@ -1,4 +1,4 @@
-import {globus, page} from '../globals/globals.js';
+import {glo, page} from '../globals/globals.js';
 import Space from '../model/Space.js';
 import Ball from '../model/Ball.js';
 import Line from '../model/Line.js';
@@ -355,7 +355,7 @@ export default class View
         //
         let w = (x2 - x1).toFixed(2);
         let h = (y2 - y1).toFixed(2);
-        let text = x2 - x1 < globus.quant && y2 - y1 < globus.quant ? '██' :  `${w} x ${h}`;
+        let text = x2 - x1 < glo.quant && y2 - y1 < glo.quant ? '██' :  `${w} x ${h}`;
         ctx.fillText(text, x2, y2);
     }
 
@@ -395,19 +395,10 @@ export default class View
 
     showTimeAndOther() {
         const el = <HTMLSpanElement>document.getElementById("info");
-        let strikes = globus.strikes * 100 / this.space.N || 0;
+        let strikes = glo.strikes * 100 / this.space.N || 0;
         el.innerHTML = `T=${this.space.time} &nbsp;&nbsp; N=${this.space.N}, &nbsp;&nbsp; strikes=${strikes}%`;
     } 
 
-    showFooter(infoObj: any) 
-    {   
-        let info = "";
-        for (let key in infoObj) {
-            let val: string = infoObj[key].toString();
-            info += key.toString() + " = " + val.padEnd(10) + "   ";            
-        }
-        page.footer.innerHTML = info;
-    }
 
     showFooter2(plun: Plunger, x:number, y: number) 
     {   
@@ -423,12 +414,7 @@ export default class View
                 `V:${v.toFixed(0)}&nbsp; P:${p.toPrecision(3)}&nbsp; T:${t.toPrecision(4)}&nbsp; S:${s.toPrecision(4)}`;
     }
 
-    hilightCommand(line: string ) 
-    {   
-        const area = page.processArea
-        let start = area.value.indexOf(line);
-        area.value = area.value.slice(0, start) + '►' +  area.value.slice(start);
-    }
+
 
 
 }

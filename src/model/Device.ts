@@ -1,5 +1,5 @@
 import Space from './Space.js';
-import {globus} from '../globals/globals.js';
+import {glo} from '../globals/globals.js';
 import { quanty } from '../globals/utils.js';
 
 export default class Device

@@ -1,4 +1,4 @@
-import {globus, page} from '../globals/globals.js';    
+import {glo, page} from '../globals/globals.js';    
 import Space from '../model/Space.js';
 import Line from '../model/Line.js';
 import {Plunger} from '../model/Plunger.js';
@@ -52,7 +52,7 @@ export default class Image
         }
         
         // globus
-        let glo = {g: globus.g, gBall: globus.gBall, quant: globus.quant, metr: globus.metr};        
+        let glo = {g: glo.g, gBall: glo.gBall, quant: glo.quant, metr: glo.metr};        
         let json = JSON.stringify({bombs, lines, plungers, devices, glo});
 
         return json;
@@ -98,14 +98,14 @@ export default class Image
         });
 
         // globus
-        Object.assign(globus, glo);
+        Object.assign(glo, glo);
         page.optionsGloElement.value = Options.obj2str(glo);
     } 
 
     load(json: string) 
     {
         this.deserialize(json);
-        const obj = {g: globus.g, gBall: globus.gBall, quant: globus.quant, metr: globus.metr};
+        const obj = {g: glo.g, gBall: glo.gBall, quant: glo.quant, metr: glo.metr};
         page.optionsGloElement.value = Options.obj2str(obj);
     }
 

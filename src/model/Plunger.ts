@@ -1,6 +1,6 @@
 import Line from "./Line.js"; 
 import Space from './Space.js';
-import {globus} from '../globals/globals.js';
+import {glo} from '../globals/globals.js';
 
 
 // u -outer work, e - enthropy
@@ -45,7 +45,7 @@ export class Plunger extends Line
    }
 
    get pressure(): number {
-      return this.m * globus.g / (this.x2 - this.x1);
+      return this.m * glo.g / (this.x2 - this.x1);
    }
 
    get volume(): number {
@@ -75,7 +75,7 @@ export class Plunger extends Line
       // let dv = (globus.g * this.m + this.impulse) / (this.m + Plunger.M0); 
       
       // гравітація діє на поршень і його навантаження
-      let dv = globus.g + this.impulse / this.m;
+      let dv = glo.g + this.impulse / this.m;
 
 
       this.velo += dv; 
@@ -122,7 +122,7 @@ export class Plunger extends Line
 
       // зсув поршня
       this.y2 = this.y1 += dy; 
-      this.u -= dy * this.m * globus.g;
+      this.u -= dy * this.m * glo.g;
 
       // очистка накопиченого імпульсу після зсуву поршня
       this.impulse = 0;
@@ -145,7 +145,7 @@ export class Plunger extends Line
 
    measureTemperature() {
       let [sumE, n] = this.sumEnergyUnderPlunger()
-      return sumE / n / globus.BOLTZ;
+      return sumE / n / glo.BOLTZ;
    }
 
    // вимір робиться у прямокутнику під поршнем
@@ -157,7 +157,7 @@ export class Plunger extends Line
       // t температура - середня кінетична енергія куль
       // p тиск - сумарна кінетична енергія куль в одиниці об'єму
       let p = sumE / v;
-      this.t = sumE / n / globus.BOLTZ;
+      this.t = sumE / n / glo.BOLTZ;
       let u = this.u;
 
       // сумарна теплота всіх нагрівачів

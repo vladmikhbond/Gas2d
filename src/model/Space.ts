@@ -1,4 +1,4 @@
-import {globus} from '../globals/globals.js';
+import {glo} from '../globals/globals.js';
 import Ball from './Ball.js';
 import Line from './Line.js';
 import Device from './Device.js';
@@ -62,7 +62,7 @@ export default class Space
     //
     addBomb(b: Bomb) 
     {
-        let v = (b.t * 2 * globus.BOLTZ / b.m) ** 0.5;    //(b.vx**2 + b.vy**2)**0.5;
+        let v = (b.t * 2 * glo.BOLTZ / b.m) ** 0.5;    //(b.vx**2 + b.vy**2)**0.5;
         for (let i = 0; i < b.n; i++) {
             // position
             let x = b.x1 + Math.random() * (b.x2 - b.x1);
@@ -183,7 +183,7 @@ export default class Space
         // всі кулі роблять крок (з перекладанням до нового контейнеру тих, що зосталися в полі зору) 
         const cont = new BallCont(this);
         this.N = 0;
-        globus.strikes = 0;
+        glo.strikes = 0;
               
         for (let ball of this.balls()) {
             ball.step();            

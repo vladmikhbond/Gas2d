@@ -1,4 +1,4 @@
-import {globus, page} from '../globals/globals.js';
+import {glo, page} from '../globals/globals.js';
 import Space, { CreateMode } from '../model/Space.js';
 import View from '../view/View.js';
 import { Options, DesignerState} from '../globals/utils.js';
@@ -33,13 +33,11 @@ export default class Controller
         this.lineHandler = new LineHandler(this);
         this.deviceHandler = new DeviceHandler(this);
         this.space.time = 0;
-        globus.strikes = 0;
+        glo.strikes = 0;
         
         this.bindHandlers()
         this.setModelSize();
         this.createMode = CreateMode.Gas;
-
-        this.startFooter();  
     }
 
     
@@ -106,7 +104,7 @@ export default class Controller
             if (e.key == "Enter") {
                 const ps = getSpaceParams();
                 if (ps) {
-                    [globus.g, globus.gBall] = ps!;                
+                    [glo.g, glo.gBall] = ps!;                
                 }
             }      
         });
@@ -209,7 +207,7 @@ export default class Controller
         this.space.time++;
         this.space.step();
         // виміри через кожні globus.metr кроків
-        if (this.space.time % globus.metr == 0) {
+        if (this.space.time % glo.metr == 0) {
             this.view.showTimeAndOther();
             //this.space.measure();
             // this.view.drawMeasure();
@@ -235,22 +233,22 @@ export default class Controller
 
 
 
-    private startFooter() {
-        let prevSteps = this.space.time;
-        setInterval(() => {
-            let freq = this.space.time - prevSteps;
-            prevSteps = this.space.time;
+    // private startFooter() {
+    //     let prevSteps = this.space.time;
+    //     setInterval(() => {
+    //         let freq = this.space.time - prevSteps;
+    //         prevSteps = this.space.time;
 
-            let strikes = globus.strikes * 100 / this.space.N || 0;
+    //         let strikes = glo.strikes * 100 / this.space.N || 0;
             
-            this.view.showFooter({
-                'steps': this.space.time,
-                'freq': freq,
-                'strikes': strikes.toFixed(1) + '%' ,
-                'N': this.space.N,
-            });            
-        }, 1000)
-    }
+    //         this.view.showFooter({
+    //             'steps': this.space.time,
+    //             'freq': freq,
+    //             'strikes': strikes.toFixed(1) + '%' ,
+    //             'N': this.space.N,
+    //         });            
+    //     }, 1000)
+    // }
 
 
 }

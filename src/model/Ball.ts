@@ -1,4 +1,4 @@
-import {globus} from '../globals/globals.js';
+import {glo} from '../globals/globals.js';
 import {dist, angle, turnV, cross, inside, crossSegSeg, crossSegLine, Point} from './Geometry.js'
 import Space from './Space.js';
 import Line from './Line.js';
@@ -57,8 +57,8 @@ export default class Ball {
         }
         
         // зміна швидкості під впливом тяжіння
-        if (globus.gBall) {
-            this.vy += globus.g;
+        if (glo.gBall) {
+            this.vy += glo.g;
         }
 
         // позначка, що зміна швидкості і координат частки вже відбулася
@@ -106,7 +106,7 @@ export default class Ball {
         turnV(b2, -alpha);
       
         // підрахунок зіткнень
-        globus.strikes++;
+        glo.strikes++;
     }
 
     // Вибудовує траекторю декількох зіткнень зі стінками.

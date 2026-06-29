@@ -1,6 +1,6 @@
 import Device from './Device.js';
 import Space from './Space.js'
-import {globus} from '../globals/globals.js';
+import {glo} from '../globals/globals.js';
 
 type Metering = { n: number, t: number, p: number, mfp: number}; 
 
@@ -82,7 +82,7 @@ export class Measurer extends Device
 
       let metering: Metering = {
          n: ballCount,
-         t: sumE / ballCount / globus.BOLTZ,                   // t температура - середня кінетична енергія куль                                      
+         t: sumE / ballCount / glo.BOLTZ,                   // t температура - середня кінетична енергія куль                                      
          p: sumE / (this.x2 - this.x1) / (this.y2 - this.y1),  // p тиск - сумарна кінетична енергія куль в одиниці об'єму
          mfp: this.meanFreePath,
       };

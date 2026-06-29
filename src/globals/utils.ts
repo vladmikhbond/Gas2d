@@ -1,4 +1,4 @@
-import {globus} from '../globals/globals.js';
+import {glo} from '../globals/globals.js';
 
 export enum DesignerState {
     Devices,
@@ -8,7 +8,7 @@ export enum DesignerState {
 
 // квантує простір при конструюванні сцен
  export   function quanty (x: number) { 
-    return Math.round(x / globus.quant) * globus.quant;
+    return Math.round(x / glo.quant) * glo.quant;
 }
 
 // Перетворює рядок "x1 = 200, y1 = 0, x2 = 200, y2 = 450, c = blue, "

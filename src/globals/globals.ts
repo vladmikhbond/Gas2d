@@ -25,7 +25,7 @@ export const page = {
     linesRadio: <HTMLInputElement>document.getElementById('lines')!,
 
     optionsGloElement: <HTMLInputElement>document.getElementById('options-glo')!,
-    optionsNewElement: <HTMLInputElement>document.getElementById('options-new')!,
+
 
     stepButton: <HTMLButtonElement>document.getElementById('step')!,
     keysSpan: <HTMLSpanElement>document.getElementById('keys')!,

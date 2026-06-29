@@ -126,15 +126,11 @@ export default class Controller
             this.createMode = CreateMode[key];            
         }); 
 
-        document.getElementById('pause-process-btn')!.addEventListener('click', () => {
+        document.getElementById('runButton')!.addEventListener('click', () => {
             if (this.timer == 0) 
                 this.run();
             else
                 this.stop();
-        });
-
-        page.stepButton.addEventListener('click', () => {
-            this.step();
         });
 
     } 

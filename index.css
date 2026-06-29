@@ -5,91 +5,6 @@
     --element-height: 50px;
 }
 
-/* ================================================================= */
-
-
-#confirm {
-    background-color: green;
-    color: white;
-    position: absolute;
-    top: 120px; 
-    left: 500px;
-    padding: 10px;
-    display: none;
-}
-
-.states-cont {  
-    width: 200px;
-    display: inline-block;
-    font-weight: 800;
-}
-
-
-
-#options-glo{      
-    width: 540px;
-    margin: 2px;
-    display: inline-block;
-}
-
-
-.kinds-cont {  
-    width: 200px;
-    display: inline-block;
-    /* font-size: 14px; */
-}
-
-#options-new {  
-    width: 380px;
-}
-
-.command {
-    padding:0;
-    width: 36px;
-    font-weight: 700;
-}
-
-#process-script {
-    margin-top: 5px;
-    height: 150px;    
-    width: 750px; 
-    white-space: nowrap;
-}
-#db {
-    background-color: aliceblue;
-    margin-top: 5px;
-    padding: 10px;
-    height: 1300px;    
-    width: 750px; 
-    white-space: nowrap;
-    border: none;
- }
-
-
-
-#footer, #footer2 {
-    font-family: Arial, Helvetica, sans-serif;
-    white-space: pre;
-    font-size: 12px;
-    width: 400px;
-    display: inline-block;
-
-}
-#footer2 {
-    width: 350px;
-}
-
-
-#image-json {  
-    height: 16px;    
-    width: 750px;
-    margin: 2px;
-}
-
-/* ================================================================= */
-
-
-
 /* <!------------------ top panel ----------------> */
 input[type="text"],
 select,
@@ -173,4 +88,17 @@ section {
     vertical-align: top; 
     background-color: lightblue;
     width: 70px;
+}
+
+/* ================================================ */
+#footer, #footer2 {
+    font-family: Arial, Helvetica, sans-serif;
+    white-space: pre;
+    font-size: 12px;
+    width: 400px;
+    display: inline-block;
+
+}
+#footer2 {
+    width: 350px;
 }

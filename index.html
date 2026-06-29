@@ -19,46 +19,27 @@
     </h1>
     <!------------------ top panel ---------------->
     <section>
-          <input id="sizeParams" type="text" value="W=600; H=400">
-          <input id="spaceParams" type="text" value="g=0.1; gBall=0" >
+        <input id="sizeParams" type="text" value="W=600; H=400">
+        <input id="spaceParams" type="text" value="g=0.1; gBall=0" >
 
-          <select id="createMode" aria-label="Select" required>
-              <option value="Info">Info</option>
-              <option value="Gas" selected >Gas</option>
-              <option value="Wall">Wall</option>
-              <option value="Devs">Devs</option>
-          </select>
-          
-          <input id="gasParams" type="text" value="n=100; r=1; t=100; m=1 " >
-          <input id="wallParams" type="text" value="type='r'" title="type='r[ectangle]'|'p[lunger]'" >
-          <input id="devsParams" type="text" value="type='h'; r=1.001; c='red'" title="type='m[eter]'|'h[eater]'" >
+        <select id="createMode" aria-label="Select" required>
+            <option value="Info">Info</option>
+            <option value="Gas" selected >Gas</option>
+            <option value="Wall">Wall</option>
+            <option value="Devs">Devs</option>
+        </select>
+        
+        <input id="gasParams" type="text" value="n=100; r=1; t=100; m=1 " >
+        <input id="wallParams" type="text" value="type='r'" title="type='r[ectangle]'|'p[lunger]'" >
+        <input id="devsParams" type="text" value="type='h'; r=1.001; c='red'" title="type='m[eter]'|'h[eater]'" >
 
+
+        <button id="runButton" title="Run | Stop">Run</button>
+        <button id="helpButton" class="command" onclick="window.open('help.html');">Help</button>
     </section>
-<!-- ============================================= -->
-    
 
-    <span id="confirm"></span>
 
-    <div>
-        <span class="kinds-cont">
-            <label>
-                <input type="radio" name="kinds" value="kind0" id="kind-radio0" checked><span id="kind-span0"></span>
-            </label>
-            <label>
-                <input type="radio" name="kinds" value="kind1" id="kind-radio1"><span id="kind-span1"></span>
-            </label>
-            <label>
-                <input type="radio" name="kinds" value="kind2" id="kind-radio2"><span id="kind-span2"></span>
-            </label>  
-        </span>
-
-        <input id="options-new" >
-        <button id="pause-process-btn" class="command" title="Play-Pause">►</button>
-        <button id="step" class="command" title="One Step">1</button>
-        <button id="help" class="command" onclick="window.open('help.html');">Help</button>
-    </div>
-
-          <!-- ------------------canvases------------------  -->
+    <!-- ------------------canvases------------------  -->
       <div class="canvas-frame">
         <canvas id="canvas2" tabindex="0"></canvas>
         <canvas id="canvas" ></canvas>

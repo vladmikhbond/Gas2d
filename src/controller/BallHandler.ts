@@ -42,7 +42,6 @@ export default class BallHandler extends Handler {
             this.draggingObject = null;
             return;
         }   
-        let o = Options.str2obj(page.optionsNewElement.value);
 
         let x1 = this.currentX, y1 = this.currentY;
         let x2 = e.offsetX, y2 = e.offsetY;
@@ -63,9 +62,7 @@ export default class BallHandler extends Handler {
 
     keydown(e: KeyboardEvent) 
     {
-        if (document.activeElement == page.optionsNewElement || document.activeElement == page.optionsGloElement ) {
-            return;
-        }
+
         super.keydown(e);
         
         switch (e.key) {

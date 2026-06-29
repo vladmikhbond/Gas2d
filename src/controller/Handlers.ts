@@ -24,8 +24,6 @@ export default class Handler {
         this.controller = controller;
         this.space = controller.space;
         this.view = controller.view;
-    
-        page.optionsNewElement.value = this.controller.stateOptions[this.controller.state][0];
     }
 
     mousedown(e: MouseEvent) {

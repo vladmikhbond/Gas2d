@@ -59,9 +59,7 @@ export default class LineHandler extends Handler {
 
     keydown(e: KeyboardEvent) 
     {
-        if (document.activeElement == page.optionsNewElement) {
-           return;
-        }
+
         super.keydown(e);
 
         if (e.ctrlKey) {

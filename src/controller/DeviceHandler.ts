@@ -63,9 +63,7 @@ export default class DeviceHandler extends Handler
     }
 
     keydown(e: KeyboardEvent) {
-        if (document.activeElement == page.optionsNewElement) {
-            return;
-        }
+
         super.keydown(e);
 
         switch (e.key) {

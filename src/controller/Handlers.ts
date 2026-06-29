@@ -5,7 +5,7 @@ import Controller from './Controller.js';
 import Ball from '../model/Ball.js';
 import Device from '../model/Device.js';
 import Line from '../model/Line.js';
-import {page} from '../globals/globals.js';
+import {doc} from '../globals/globals.js';
 import {Plunger} from '../model/Plunger.js';
 
 
@@ -33,7 +33,7 @@ export default class Handler {
     }
 
     mousemove(e: MouseEvent) {
-        page.footer2.innerHTML = `${e.offsetX}, ${e.offsetY}`;
+        (<HTMLElement>document.getElementById('info2')!).innerHTML = `${e.offsetX}, ${e.offsetY}`;
 
         if (!this.isDrawing) {
             return;
@@ -96,22 +96,22 @@ export default class Handler {
         this.space.selectDevice(x, y);
 
         if (this.space.selectedLine) {
-            page.linesRadio.checked = true;
-            page.linesRadio.dispatchEvent(new InputEvent("change"));
+            doc.linesRadio.checked = true;
+            doc.linesRadio.dispatchEvent(new InputEvent("change"));
             return;
         }
 
 
         if (this.space.selectedBall) {
-            page.ballsRadio.checked = true;
-            page.ballsRadio.dispatchEvent(new InputEvent("change"));
+            doc.ballsRadio.checked = true;
+            doc.ballsRadio.dispatchEvent(new InputEvent("change"));
             return;
         }
 
 
         if (this.space.selectedDevice) {
-            page.noneRadio.checked = true;
-            page.noneRadio.dispatchEvent(new InputEvent("change"));
+            doc.noneRadio.checked = true;
+            doc.noneRadio.dispatchEvent(new InputEvent("change"));
             return;
         }
     }

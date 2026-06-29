@@ -1,4 +1,4 @@
-import {glo, page} from '../globals/globals.js';
+import {glo, doc} from '../globals/globals.js';
 import Space, { CreateMode } from '../model/Space.js';
 import View from '../view/View.js';
 import { Options, DesignerState} from '../globals/utils.js';
@@ -78,10 +78,10 @@ export default class Controller
         document.documentElement.style.setProperty('--canvas-width', w+'px');
         document.documentElement.style.setProperty('--canvas-height', h+'px');
         // document.getElementById("savedSceneText")!.style.width = (w - 125)+'px';             
-        page.canvas.height = h;
-        page.canvas.width = w;
-        page.canvas2.height = h;
-        page.canvas2.width = w;
+        doc.canvas.height = h;
+        doc.canvas.width = w;
+        doc.canvas2.height = h;
+        doc.canvas2.width = w;
     }
 
     private bindHandlers() {
@@ -109,7 +109,7 @@ export default class Controller
             }      
         });
 
-        // Set Create Mode
+        // Change Create Mode
         document.getElementById("createMode")!.addEventListener("change", (e: Event) =>
         {
             let str = (e.target as HTMLSelectElement).value;
@@ -122,6 +122,21 @@ export default class Controller
                 this.run();
             else
                 this.stop();
+        });
+
+        // Кey commands
+        document.addEventListener("keydown", (e) => {
+            switch (e.key) {
+                // step execution
+                case 's': case 'S': case 'і': case 'І':
+                    this.stop();
+                    this.step();
+                    break;
+                // case 'Delete':
+                //     this.space.deleteSelected(this.createMode);
+                //     this.view.drawAll();
+                //     break;
+            }
         });
 
     } 
@@ -196,10 +211,10 @@ export default class Controller
     
 
     private switchHandlers(handler: Handler)  {
-        page.canvas.onmousedown = (e) => handler.mousedown(e);
-        page.canvas.onmousemove = (e) => handler.mousemove(e);
-        page.canvas.onmouseup = (e) => handler.mouseup(e);
-        page.canvas.onkeydown = (e) => handler.keydown(e);
+        doc.canvas.onmousedown = (e) => handler.mousedown(e);
+        doc.canvas.onmousemove = (e) => handler.mousemove(e);
+        doc.canvas.onmouseup = (e) => handler.mouseup(e);
+        doc.canvas.onkeydown = (e) => handler.keydown(e);
         // page.canvas2Element.onkeydown = (e) => handler.keydown(e);
     }
 
@@ -208,7 +223,7 @@ export default class Controller
         this.space.step();
         // виміри через кожні globus.metr кроків
         if (this.space.time % glo.metr == 0) {
-            this.view.showTimeAndOther();
+            this.view.showTimeAndInfo();
             //this.space.measure();
             // this.view.drawMeasure();
         }

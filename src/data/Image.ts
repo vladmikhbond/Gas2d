@@ -1,4 +1,4 @@
-import {glo, page} from '../globals/globals.js';    
+import {glo, doc} from '../globals/globals.js';    
 import Space from '../model/Space.js';
 import Line from '../model/Line.js';
 import {Plunger} from '../model/Plunger.js';
@@ -99,19 +99,19 @@ export default class Image
 
         // globus
         Object.assign(glo, glo);
-        page.optionsGloElement.value = Options.obj2str(glo);
+        doc.optionsGloElement.value = Options.obj2str(glo);
     } 
 
     load(json: string) 
     {
         this.deserialize(json);
         const obj = {g: glo.g, gBall: glo.gBall, quant: glo.quant, metr: glo.metr};
-        page.optionsGloElement.value = Options.obj2str(obj);
+        doc.optionsGloElement.value = Options.obj2str(obj);
     }
 
     save(key: string) {
         const json = this.serialize();
-        page.imageElement.value = `${key}: '${json}',`;
+        doc.imageElement.value = `${key}: '${json}',`;
     }
 
     

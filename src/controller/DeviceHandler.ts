@@ -3,7 +3,7 @@ import Controller from './Controller.js';
 import {Measurer} from '../model/Measurer.js'
 import {Heater} from '../model/Heaters.js';
 import Image from '../data/Image.js';
-import {glo, page} from '../globals/globals.js';
+import {glo, doc} from '../globals/globals.js';
 import Handler from './Handlers.js';
 import { getDevsParams } from './params.js';
 
@@ -77,13 +77,13 @@ export default class DeviceHandler extends Handler
                 break;
             case 'c':
                 if (e.ctrlKey && this.space.selectedDevice) {
-                    page.imageElement.value = Options.obj2str(this.space.selectedDevice);
+                    doc.imageElement.value = Options.obj2str(this.space.selectedDevice);
                     confirmAction('Data copied.');
                 }
                 break;
             case 'v':
                 if (e.ctrlKey) {
-                    let o = Options.str2obj(page.imageElement.value);
+                    let o = Options.str2obj(doc.imageElement.value);
                     Object.assign(<Object>this.space.selectedDevice, o);
                     this.view.draw();
                     confirmAction('Data readed.');                    

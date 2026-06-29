@@ -1,4 +1,4 @@
-import {glo, page} from '../globals/globals.js';
+import {glo, doc} from '../globals/globals.js';
 import Space from '../model/Space.js';
 import Ball from '../model/Ball.js';
 import Line from '../model/Line.js';
@@ -19,7 +19,7 @@ export default class View
 
     constructor(space: Space) {
         this.space = space;
-        this.ctx = (<HTMLCanvasElement>page.canvas!).getContext("2d")!;             
+        this.ctx = (<HTMLCanvasElement>doc.canvas!).getContext("2d")!;             
     }
 
 //#region Canvas1  
@@ -27,7 +27,7 @@ export default class View
     draw() {   
         const ctx = this.ctx;
         const space = this.space;
-        ctx.clearRect(0, 0, page.canvas.width, page.canvas.height);
+        ctx.clearRect(0, 0, doc.canvas.width, doc.canvas.height);
         
         // grid
         this.drawGrayGrid();
@@ -145,7 +145,7 @@ export default class View
 
     //#endregion Canvas1    
  
-    //#region Canvas2
+//#region Canvas2
 
     // drawMeasure() {
     //     this.ctx2.clearRect(0, 0, page.canvas2Element.width, page.canvas2Element.height);
@@ -273,8 +273,8 @@ export default class View
     
     private X = 5;
     private Y = 30;
-    private W = page.canvas.width - 10;
-    private H = page.canvas.height - this.Y - 5;
+    private W = doc.canvas.width - 10;
+    private H = doc.canvas.height - this.Y - 5;
 
 
     // drawPlungerMeters(plun: Plunger) {
@@ -345,7 +345,7 @@ export default class View
 
     //#endregion Canvas2
 
-    //#region Gray Zone
+//#region Gray Zone
 
     drawGrayRect(x1: number, y1: number, x2: number, y2: number,) {
         const ctx = this.ctx;
@@ -392,15 +392,16 @@ export default class View
 
 //#endregion Gray Zone
 
+//#region DOM
 
-    showTimeAndOther() {
+    showTimeAndInfo() {
         const el = <HTMLSpanElement>document.getElementById("info");
-        let strikes = glo.strikes * 100 / this.space.N || 0;
+        let strikes = this.space.N ? (glo.strikes * 100 / this.space.N).toFixed(1) : "0";
         el.innerHTML = `T=${this.space.time} &nbsp;&nbsp; N=${this.space.N}, &nbsp;&nbsp; strikes=${strikes}%`;
     } 
 
 
-    showFooter2(plun: Plunger, x:number, y: number) 
+    showFooter2(plun: Plunger, x:number, y: number)  // ????
     {   
         const [X, Y, W, H] = [this.X, this.Y, this.W, this.H]; 
         const vMax = (plun.realBottom - plun.top) * (plun.x2 - plun.x1);
@@ -410,11 +411,10 @@ export default class View
         const t = (Y + H - y) / plun.scales.T / H * 3000;
         const s = (Y + H/2 - y) / plun.scales.S / H * 300;        
 
-        page.footer2.innerHTML = 
+        (<HTMLElement>document.getElementById('mousePosInfo')!).innerHTML = 
                 `V:${v.toFixed(0)}&nbsp; P:${p.toPrecision(3)}&nbsp; T:${t.toPrecision(4)}&nbsp; S:${s.toPrecision(4)}`;
     }
 
-
-
+//#endregion DOM
 
 }

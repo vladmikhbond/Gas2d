@@ -4,7 +4,7 @@ import Controller from './Controller.js';
 import Line from '../model/Line.js';
 import {Plunger} from '../model/Plunger.js';
 import Handler from './Handlers.js';
-import {glo, page} from '../globals/globals.js';
+import {glo, doc} from '../globals/globals.js';
 import { getWallParams } from './params.js';
 
 
@@ -66,12 +66,12 @@ export default class LineHandler extends Handler {
             switch (e.key) {
                 case 'c':
                     if (this.space.selectedLine) {
-                        page.imageElement.value = Options.obj2str(this.space.selectedLine);
+                        doc.imageElement.value = Options.obj2str(this.space.selectedLine);
                         confirmAction('Data copied.');
                     }
                     break;
                 case 'v':
-                    let o = Options.str2obj(page.imageElement.value);
+                    let o = Options.str2obj(doc.imageElement.value);
                     Object.assign(<Object>this.space.selectedLine, o);
                     this.view.draw();
                     confirmAction('Data readed.');

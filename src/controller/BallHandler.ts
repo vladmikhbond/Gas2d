@@ -1,4 +1,4 @@
-import {page} from '../globals/globals.js';
+import {doc} from '../globals/globals.js';
 import { dist, } from '../model/Geometry.js'
 import Bomb from '../model/Bomb.js'
 import { Options, confirmAction,} from '../globals/utils.js';
@@ -76,13 +76,13 @@ export default class BallHandler extends Handler {
                 break;
             case 'c':
                 if (e.ctrlKey && this.space.selectedBall) {
-                    page.imageElement.value = Options.obj2str(this.space.selectedBall);
+                    doc.imageElement.value = Options.obj2str(this.space.selectedBall);
                     confirmAction('Data copied.');
                 }
                 break;
             case 'v':
                 if (e.ctrlKey) {
-                    let o = Options.str2obj(page.imageElement.value);
+                    let o = Options.str2obj(doc.imageElement.value);
                     Object.assign(<Object>this.space.selectedBall, o);
                     confirmAction('Data readed.');
                     this.view.draw();                    

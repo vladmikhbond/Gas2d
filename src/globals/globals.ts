@@ -14,13 +14,8 @@ export const glo =
 
 };
 
-export const page = { 
+export const doc = { 
     canvas: <HTMLCanvasElement>document.getElementById('canvas'),
     canvas2: <HTMLCanvasElement>document.getElementById('canvas2'),
-
-    optionsGloElement: <HTMLInputElement>document.getElementById('options-glo')!,
-
-
-    footer2: <HTMLElement>document.getElementById('footer2')!,
-
+   
 }

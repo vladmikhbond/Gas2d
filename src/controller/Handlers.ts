@@ -55,37 +55,37 @@ export default class Handler {
     mouseup(e: MouseEvent) { }
 
     keydown(e: KeyboardEvent) { 
-        // switch (e.key) {
-        //     case 'P': case 'p': case 'V': case 'v': case 'T': case 't': case 'S': case 's': case 'X': case 'x':
-        //         // маштабування тиску на PV і TV-діаграмі
-        //         if (this.space.plunger) {
-        //             this.space.plunger.scale(e.key);
-        //             this.view.drawMeasure();
-        //         }
-        //         break;
-        //     case '0':
-        //         // очистити журнал вимірювань
-        //         if (this.space.plunger) {
-        //             this.space.plunger.clearMeterings();
-        //             this.view.drawMeasure();
-        //         }
-        //         break;
-        //     case '1': case '2':
-        //         // встановити ширину лінії графіку
-        //         if (this.space.plunger) {
-        //             this.space.plunger.scales.w = +e.key;
-        //             this.view.drawMeasure();
-        //         }
-        //         break;
-        //     case 'f':
-        //         // зафіксувати-розфіксувати поршень
-        //         if (this.space.plunger) {
-        //             this.space.plunger.fixed = !this.space.plunger.fixed;
-        //             this.view.draw();
-        //         }
-        //         break;
+        switch (e.key) {
+            case 'P': case 'p': case 'V': case 'v': case 'T': case 't': case 'S': case 's': case 'X': case 'x':
+                // маштабування тиску на PV і TV-діаграмі
+                if (this.space.plunger) {
+                    this.space.plunger.scale(e.key);
+                    // this.view.drawMeasure();
+                }
+                break;
+            case '0':
+                // очистити журнал вимірювань
+                if (this.space.plunger) {
+                    this.space.plunger.clearMeterings();
+                    // this.view.drawMeasure();
+                }
+                break;
+            case '1': case '2':
+                // встановити ширину лінії графіку
+                if (this.space.plunger) {
+                    this.space.plunger.scales.w = +e.key;
+                    // this.view.drawMeasure();
+                }
+                break;
+            case 'f':
+                // зафіксувати-розфіксувати поршень
+                if (this.space.plunger) {
+                    this.space.plunger.fixed = !this.space.plunger.fixed;
+                    this.view.draw();
+                }
+                break;
 
-        // }
+        }
     }
 
 

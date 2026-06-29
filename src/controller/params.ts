@@ -1,4 +1,3 @@
-type N1 = [number];
 type N2 = [number, number];
 type N4 = [number, number, number, number];
 

@@ -1,9 +1,7 @@
-import { Options, confirmAction, getKindValue} from '../globals/utils.js';
 import Controller from './Controller.js';
 import {Measurer} from '../model/Measurer.js'
 import {Heater} from '../model/Heaters.js';
-import Image from '../data/Image.js';
-import {glo, doc} from '../globals/globals.js';
+import {glo} from '../globals/globals.js';
 import Handler from './Handlers.js';
 import { getDevsParams } from './params.js';
 

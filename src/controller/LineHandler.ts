@@ -1,10 +1,10 @@
 
-import { Options, confirmAction, getKindValue} from '../globals/utils.js';
+import { confirmAction} from '../globals/utils.js';
 import Controller from './Controller.js';
 import Line from '../model/Line.js';
 import {Plunger} from '../model/Plunger.js';
 import Handler from './Handlers.js';
-import {glo, doc} from '../globals/globals.js';
+import {glo} from '../globals/globals.js';
 import { getWallParams } from './params.js';
 
 

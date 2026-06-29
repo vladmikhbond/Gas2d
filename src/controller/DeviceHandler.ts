@@ -75,25 +75,6 @@ export default class DeviceHandler extends Handler
                 }
                 this.view.draw();
                 break;
-            case 'c':
-                if (e.ctrlKey && this.space.selectedDevice) {
-                    doc.imageElement.value = Options.obj2str(this.space.selectedDevice);
-                    confirmAction('Data copied.');
-                }
-                break;
-            case 'v':
-                if (e.ctrlKey) {
-                    let o = Options.str2obj(doc.imageElement.value);
-                    Object.assign(<Object>this.space.selectedDevice, o);
-                    this.view.draw();
-                    confirmAction('Data readed.');                    
-                }
-                break;
-            case 's':  // save image
-            {
-                new Image(this.space).save('[name]');
-                break;
-            }
                
         }
     }

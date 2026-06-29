@@ -60,7 +60,6 @@ export default class BallHandler extends Handler {
 
     keydown(e: KeyboardEvent) 
     {
-
         super.keydown(e);
         
         switch (e.key) {

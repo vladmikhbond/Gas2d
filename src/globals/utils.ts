@@ -16,21 +16,21 @@ export enum DesignerState {
 export class Options 
 {
 
-    static str2obj(str: string)
-    {
-        const reg = /([^=]+)=([^=]+)[,;]/g;
-        str = str.trim();
-        if (!str.endsWith(',')) 
-            str += ',';
+    // static str2obj(str: string)
+    // {
+    //     const reg = /([^=]+)=([^=]+)[,;]/g;
+    //     str = str.trim();
+    //     if (!str.endsWith(',')) 
+    //         str += ',';
 
-        const matches = str.matchAll(reg);
-        const o: any = {}; 
-        for(let match of matches) {
-            const str = match[2].trim();
-            o[match[1].trim()] = isNaN(+str) ? str : +str;
-        }
-        return o;
-    }
+    //     const matches = str.matchAll(reg);
+    //     const o: any = {}; 
+    //     for(let match of matches) {
+    //         const str = match[2].trim();
+    //         o[match[1].trim()] = isNaN(+str) ? str : +str;
+    //     }
+    //     return o;
+    // }
 
     // obj -> "x1 = 200, y1 = 0, x2 = 200, y2 = 450, c = blue, "
     static obj2str(obj: object): string 

@@ -1,7 +1,7 @@
 import {glo, doc} from '../globals/globals.js';
 import Space, { CreateMode } from '../model/Space.js';
 import View from '../view/View.js';
-import { Options, DesignerState} from '../globals/utils.js';
+import { DesignerState} from '../globals/utils.js';
 import Handler from './Handlers.js';
 import BallHandler from './BallHandler.js';
 import LineHandler from './LineHandler.js';
@@ -125,17 +125,13 @@ export default class Controller
         });
 
         // Кey commands
-        document.addEventListener("keydown", (e) => {
+        doc.canvas.addEventListener("keydown", (e) => {
             switch (e.key) {
                 // step execution
                 case 's': case 'S': case 'і': case 'І':
                     this.stop();
                     this.step();
                     break;
-                // case 'Delete':
-                //     this.space.deleteSelected(this.createMode);
-                //     this.view.drawAll();
-                //     break;
             }
         });
 
@@ -147,7 +143,6 @@ export default class Controller
         doc.canvas.onmousemove = (e) => handler.mousemove(e);
         doc.canvas.onmouseup = (e) => handler.mouseup(e);
         doc.canvas.onkeydown = (e) => handler.keydown(e);
-        // page.canvas2Element.onkeydown = (e) => handler.keydown(e);
     }
 
     step() {

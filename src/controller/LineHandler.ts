@@ -59,26 +59,7 @@ export default class LineHandler extends Handler {
 
     keydown(e: KeyboardEvent) 
     {
-
         super.keydown(e);
-
-        if (e.ctrlKey) {
-            switch (e.key) {
-                case 'c':
-                    if (this.space.selectedLine) {
-                        doc.imageElement.value = Options.obj2str(this.space.selectedLine);
-                        confirmAction('Data copied.');
-                    }
-                    break;
-                case 'v':
-                    let o = Options.str2obj(doc.imageElement.value);
-                    Object.assign(<Object>this.space.selectedLine, o);
-                    this.view.draw();
-                    confirmAction('Data readed.');
-                    break;                                
-            }    
-            return;
-        }
 
         switch (e.key) {
             case 'Delete':

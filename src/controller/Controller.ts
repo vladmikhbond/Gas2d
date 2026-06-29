@@ -140,75 +140,7 @@ export default class Controller
         });
 
     } 
-    
-
-    // 0-device, 1-balls, 2-lines
-    stateOptions: string[][] = [
-        ['c = red, s = 0', 'rate = 1.001'] ,     
-        ['n = 5000, r = 0.5, vx=2, vy = 2, c = red, m = 1', 'n = 5000, r = 0.5, t = 120, c = red, m = 1'],  
-        ['c = blue', 'c = black' ]];
-
-
-
-
-    stateRadioSpans: string[][] = [
-        ['Meter', 'Heater'],     
-        ['Determine', 'Random'],  
-        ['Rectangle', 'Plunger']];
-    
-
-    // private switchState(newState: DesignerState) 
-    // {
-    //     // switch Handlers
-    //     switch (newState) {
-    //         case DesignerState.Balls:
-    //             this.switchHandlers(this.ballHandler);
-    //             break;
-    //         case DesignerState.Lines:
-    //             this.switchHandlers(this.lineHandler);
-    //             break;
-    //         case DesignerState.Devices:
-    //             this.switchHandlers(this.deviceHandler);
-    //             break;
-    //     }
-    //     // save previous opts
-    //     this.stateOptions[this.state][this.substate] = page.optionsNewElement.value
-    //     this.state = newState;
-    //     // restore current opts
-    //     page.optionsNewElement.value = this.stateOptions[this.state][this.substate];
-
-    //     // change radio buttons UI
-
-    //     let kindValues =  this.stateRadioSpans[newState];
-    //     for (let i = 0; i < 3; i++) {
-    //         const radio = page.kindRadios[i];
-    //         const span = page.kindSpans[i];
-    //         if (i < kindValues.length) {  
-    //             const text = kindValues[i];
-    //             span.innerText = text;
-    //             radio.dataset.val = i.toString();
-    //             radio.style.display = span.style.display = 'inline';
-    //         } else {
-    //             radio.style.display = span.style.display = 'none';
-    //         }
-    //     }
-    //     let substate = 0;
-    //     this.substate = substate;
-    //     page.kindRadios[substate].checked = true;
-    //     page.optionsNewElement.value = this.stateOptions[this.state][substate];
-    // };
-
-
-    // private switchSubstate(newSubstate: number) {
-    //     if (page.kindRadios[newSubstate].checked) {
-    //         // save previous opts
-    //         this.stateOptions[this.state][this.substate] = page.optionsNewElement.value
-    //         this.substate= newSubstate;
-    //         // restore current opts
-    //         page.optionsNewElement.value = this.stateOptions[this.state][this.substate];
-    //     }      
-    // } 
-    
+ 
 
     private switchHandlers(handler: Handler)  {
         doc.canvas.onmousedown = (e) => handler.mousedown(e);
@@ -244,26 +176,6 @@ export default class Controller
             this.step();
         }, 1);
     }
-
-
-
-
-    // private startFooter() {
-    //     let prevSteps = this.space.time;
-    //     setInterval(() => {
-    //         let freq = this.space.time - prevSteps;
-    //         prevSteps = this.space.time;
-
-    //         let strikes = glo.strikes * 100 / this.space.N || 0;
-            
-    //         this.view.showFooter({
-    //             'steps': this.space.time,
-    //             'freq': freq,
-    //             'strikes': strikes.toFixed(1) + '%' ,
-    //             'N': this.space.N,
-    //         });            
-    //     }, 1000)
-    // }
 
 
 }

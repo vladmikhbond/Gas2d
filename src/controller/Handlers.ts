@@ -91,29 +91,10 @@ export default class Handler {
 
     selectAndSwithState(x: number, y: number) {
 
-        this.space.selectLine(x, y);
-        this.space.selectBall(x, y);
-        this.space.selectDevice(x, y);
+        // this.space.selectLine(x, y);
+        // this.space.selectBall(x, y);
+        // this.space.selectDevice(x, y);
 
-        if (this.space.selectedLine) {
-            doc.linesRadio.checked = true;
-            doc.linesRadio.dispatchEvent(new InputEvent("change"));
-            return;
-        }
-
-
-        if (this.space.selectedBall) {
-            doc.ballsRadio.checked = true;
-            doc.ballsRadio.dispatchEvent(new InputEvent("change"));
-            return;
-        }
-
-
-        if (this.space.selectedDevice) {
-            doc.noneRadio.checked = true;
-            doc.noneRadio.dispatchEvent(new InputEvent("change"));
-            return;
-        }
     }
 
 

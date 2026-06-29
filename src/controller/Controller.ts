@@ -39,42 +39,35 @@ export default class Controller
         this.setModelSize();
         this.createMode = CreateMode.Gas;
 
-        this.startFooter();
-
-        
+        this.startFooter();  
     }
 
-    set createMode(value: CreateMode) 
+    
+    set createMode(mode: CreateMode) 
     {
-        this._createMode = value;
-        switch(value) {
+        let gas = document.getElementById("gasParams")!.style;
+        let wal = document.getElementById("wallParams")!.style;
+        let dev = document.getElementById("devsParams")!.style;
+        gas.display = wal.display = dev.display = "none";
+
+        this._createMode = mode;
+        switch(mode) {
             case CreateMode.Info:
                 break;
             case CreateMode.Gas:
                 this.switchHandlers(this.ballHandler);
+                gas.display = "inline";
                 break;
             case CreateMode.Wall:
                 this.switchHandlers(this.lineHandler);
+                wal.display = "inline";
                 break;
             case CreateMode.Devs:
                 this.switchHandlers(this.deviceHandler);
+                dev.display = "inline";
                 break;
         }
-
-            // let sb = document.getElementById("ballParams")!.style;
-            // let sl = document.getElementById("lineParams")!.style;
-            // let sk = document.getElementById("linkParams")!.style;
-            // sb.display = sl.display = sk.display = 
-
-            // document.getElementById("ballParams")!.style.display = "none";
-            // switch (this.createMode) {
-            //     case CreateMode.Ball: sb.display = "inline"; break;
-            //     case CreateMode.Line: sl.display = "inline"; break;
-            //     case CreateMode.Link: sk.display = "inline"; break;
-            //     default: break;
-            // }         
-
-        
+                 
     }
 
     get createMode() {
@@ -215,9 +208,10 @@ export default class Controller
     step() {
         this.space.time++;
         this.space.step();
-        // віміри через кожні Q кроків
+        // виміри через кожні globus.metr кроків
         if (this.space.time % globus.metr == 0) {
-            this.space.measure();
+            this.view.showTimeAndOther();
+            //this.space.measure();
             // this.view.drawMeasure();
         }
         this.view.draw();

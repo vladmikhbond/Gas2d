@@ -393,6 +393,12 @@ export default class View
 //#endregion Gray Zone
 
 
+    showTimeAndOther() {
+        const el = <HTMLSpanElement>document.getElementById("info");
+        let strikes = globus.strikes * 100 / this.space.N || 0;
+        el.innerHTML = `T=${this.space.time} &nbsp;&nbsp; N=${this.space.N}, &nbsp;&nbsp; strikes=${strikes}%`;
+    } 
+
     showFooter(infoObj: any) 
     {   
         let info = "";

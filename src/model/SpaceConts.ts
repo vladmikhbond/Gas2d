@@ -169,11 +169,15 @@ export class DevCont
         this.space = space;
     }
 
-    *values() {
-        let arr = this.arr;
-        for(let i = 0; i < arr.length; i++) {           
-            yield arr[i];        
-        }
+    // *values() {
+    //     let arr = this.arr;
+    //     for(let i = 0; i < arr.length; i++) {           
+    //         yield arr[i];        
+    //     }
+    // }
+
+    values() {
+        return this.arr;
     }
 
     add(device: Device) 

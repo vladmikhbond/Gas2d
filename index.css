@@ -27,6 +27,7 @@ input[type="checkbox"] {
 
 input[type="text"] {
     width: 200px;
+    padding: 6px;
 }
 
 select {
@@ -38,7 +39,6 @@ select {
     background-color: lightblue;
 }
 
-#time,
 #info {
     margin-left: 50px;
     font-size: large;

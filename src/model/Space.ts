@@ -155,7 +155,9 @@ export default class Space
         this.selectedDevice = null; 
     }
 
-    devices() { return this.dcont.values() }
+    devices() { 
+        return this.dcont.values() 
+    }
 
 //#endregion Devices
 
@@ -194,14 +196,11 @@ export default class Space
 
         // зміна швидкості куль від нагріву або охолодження
         this.warming(); 
-
     }
 
 
-
-
     measure() {
-        [...this.devices()].forEach(d => d.measure());
+        this.devices().forEach(d => d.measure());
         this.plungers.forEach(p => p.measure());
     }
 

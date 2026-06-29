@@ -89,12 +89,11 @@ export default class Handler {
     }
 
 
-    selectAndSwithState(x: number, y: number) {
+    selectObject(x: number, y: number) {
 
-        // this.space.selectLine(x, y);
-        // this.space.selectBall(x, y);
-        // this.space.selectDevice(x, y);
-
+        this.space.selectLine(x, y);
+        this.space.selectBall(x, y);
+        this.space.selectDevice(x, y);
     }
 
 

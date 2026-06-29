@@ -1,7 +1,5 @@
-import {doc} from '../globals/globals.js';
 import { dist, } from '../model/Geometry.js'
 import Bomb from '../model/Bomb.js'
-import { Options, confirmAction,} from '../globals/utils.js';
 import Controller from './Controller.js';
 import Handler from './Handlers.js';
 import { getGasParams } from './params.js';
@@ -49,7 +47,7 @@ export default class BallHandler extends Handler {
 
         // just mouse click
         if (drawDist <= CLICK_DIST) {
-            this.selectAndSwithState(x1, y1);
+            this.selectObject(x1, y1);
         } else {
             let ps = getGasParams();
             if (ps) {
@@ -73,20 +71,6 @@ export default class BallHandler extends Handler {
                     this.space.clearBalls()
                 }
                 this.view.draw();
-                break;
-            case 'c':
-                if (e.ctrlKey && this.space.selectedBall) {
-                    doc.imageElement.value = Options.obj2str(this.space.selectedBall);
-                    confirmAction('Data copied.');
-                }
-                break;
-            case 'v':
-                if (e.ctrlKey) {
-                    let o = Options.str2obj(doc.imageElement.value);
-                    Object.assign(<Object>this.space.selectedBall, o);
-                    confirmAction('Data readed.');
-                    this.view.draw();                    
-                }
                 break;
             case 'ArrowUp':
                 if (this.space.selectedBall) {

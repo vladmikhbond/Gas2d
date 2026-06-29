@@ -43,7 +43,7 @@ export default class DeviceHandler extends Handler
         if (x2 - x1 < glo.quant && y2 - y1 < glo.quant) 
         {
             // just mouse click
-            this.selectAndSwithState(x1, y1);
+            this.selectObject(x1, y1);
         } 
         else 
         {

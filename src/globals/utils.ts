@@ -76,7 +76,7 @@ function serializeLine(line: Line) {
 
 function serializeDevice(device: Device) {
     const snapshot: Record<string, unknown> = {
-        kind: device instanceof Heater ? 'Heater' : 'Device',
+        kind: device instanceof Heater ? 'Heater' : 'Measurer',
         x1: device.x1,
         y1: device.y1,
         x2: device.x2,

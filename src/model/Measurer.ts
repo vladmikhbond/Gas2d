@@ -69,12 +69,12 @@ export class Measurer extends Device
             sumPath += ((ball.x - ball.prevX)**2 + (ball.y - ball.prevY)**2) ** 0.5;            
          }
       }
-      let strikes = 1; // globus.strikes * ballCount / this.space.N;  //todo
+      let strikes = glo.strikes * ballCount / this.space!.N; 
       this.meanFreePath = sumPath / (2 * strikes);
 
       let metering: Metering = {
          n: ballCount,
-         t: sumE / ballCount / glo.BOLTZ,                   // t температура - середня кінетична енергія куль                                      
+         t: sumE / ballCount / glo.BOLTZ,                      // t температура - середня кінетична енергія куль                                      
          p: sumE / (this.x2 - this.x1) / (this.y2 - this.y1),  // p тиск - сумарна кінетична енергія куль в одиниці об'єму
          mfp: this.meanFreePath,
       };

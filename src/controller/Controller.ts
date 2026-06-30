@@ -170,7 +170,7 @@ export default class Controller
         if (this.space.time % glo.metr == 0) {
             this.view.showTimeAndInfo();
             this.space.measure();
-            // this.view.drawMeasure();
+            this.view.drawMeasure();
         }
         this.view.draw();
     }

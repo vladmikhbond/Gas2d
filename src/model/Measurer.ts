@@ -2,14 +2,13 @@ import Device from './Device.js';
 import Space from './Space.js'
 import {glo} from '../globals/globals.js';
 
-type Metering = { n: number, t: number, p: number, mfp: number}; 
+type Metering = { n: number, t: number, p: number, mfp: number};   // mfp - mean free path
 
 export class Measurer extends Device
 {
    static HIST_COLUMNS = 100;
-   static ACTUAL = 50;  // макс кількість замірів для усереднення
+   static METERING_NUMBER = 50;  // макс кількість замірів для усереднення
 
-   c: string;  // колір куль, які вимірюються
    shift = 0;  // зсув гарфиків по вертикалі
 
    histogram: number[] = [];
@@ -18,13 +17,6 @@ export class Measurer extends Device
    meterings: Metering[] = [];
 
    space: Space | null = null;
-
-   constructor(x1: number, y1: number, x2: number, y2: number, c: string, shift = 0)
-   {
-      super(x1, y1, x2, y2);
-      this.c = c;
-      this.shift = shift;
-   }
    
    get avatar() {
       return "M";
@@ -32,13 +24,13 @@ export class Measurer extends Device
 
    avg(): Metering
    {
-      const meterings = this.meterings.slice(-Measurer.ACTUAL);
-      let ac = [0, 0, 0, 0];
-      ac = meterings.reduce((ac, m) => [ac[0] + m.n,  ac[1] + m.t, ac[2] + m.p, ac[3] + m.mfp], ac)
+      const meterings = this.meterings.slice(-Measurer.METERING_NUMBER);
+      let accum = [0, 0, 0, 0]; 
+      accum = meterings.reduce((ac, m) => [ac[0] + m.n,  ac[1] + m.t, ac[2] + m.p, ac[3] + m.mfp], accum)
       let len = meterings.length;
       
       if (len) {
-         return {n: ac[0]/len, t: ac[1]/len, p: ac[2]/len, mfp: ac[3]/len};
+         return {n: accum[0]/len, t: accum[1]/len, p: accum[2]/len, mfp: accum[3]/len};
       } else {
          return {n: 0, t:0, p:0, mfp: 0};
       } 
@@ -47,8 +39,8 @@ export class Measurer extends Device
    measure(): Metering
    {  
       // truncate meterings
-      if (this.meterings.length > Measurer.ACTUAL * 2) {
-         this.meterings.splice(0,  Measurer.ACTUAL);
+      if (this.meterings.length > Measurer.METERING_NUMBER * 2) {
+         this.meterings.splice(0,  Measurer.METERING_NUMBER);
       } 
 
       let ballCount = 0, sumE = 0;

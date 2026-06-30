@@ -5,9 +5,9 @@ export class Heater extends Device
    erg = 0;             // given amount of heat
    rate: number;        // speed of heating 
 
-   constructor(x1: number, y1: number, x2: number, y2: number,  rate: number)
+   constructor(x1: number, y1: number, x2: number, y2: number,  rate: number, c: string)
    {
-      super(x1, y1, x2, y2);
+      super(x1, y1, x2, y2, c);
       this.rate = rate;
    }
 
@@ -18,6 +18,8 @@ export class Heater extends Device
 
       for (let ball of this.space!.balls()) 
       {
+         if (this.c && ball.c != this.c)
+            continue;
          if (this.isInside(ball.x, ball.y)) {                        
             // зміна енергії
             ball.vx *= k;

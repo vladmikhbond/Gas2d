@@ -38,6 +38,7 @@ export class BallCont {
     }
 
     // Проходить по всім елементам, що в контейнері.
+    // Напрямок проходження (прямий або зворотний) залежить від мометну часу.
     //
     *values() {
         let arr = this.arr;
@@ -162,22 +163,11 @@ export class WallCont
 
 export class DevCont 
 {
-    private arr: Device[] = []; 
+    devices: Device[] = []; 
     private space: Space;
 
     constructor (space: Space) {
         this.space = space;
-    }
-
-    // *values() {
-    //     let arr = this.arr;
-    //     for(let i = 0; i < arr.length; i++) {           
-    //         yield arr[i];        
-    //     }
-    // }
-
-    values() {
-        return this.arr;
     }
 
     add(device: Device) 
@@ -190,14 +180,14 @@ export class DevCont
             let t = device.y1; device.y1 = device.y2; device.y2 = t; 
         }   
         device.space = this.space;     
-        this.arr.push(device);
+        this.devices.push(device);
     }
 
     select(x: number, y: number) {
-        if (this.arr.length == 0) {
+        if (this.devices.length == 0) {
            return;
         }
-        let devices = this.arr.filter(d => d.isInside(x, y));
+        let devices = this.devices.filter(d => d.isInside(x, y));
         this.space.selectedDevice = devices.length > 0 ? devices[0] : null;
     }
 
@@ -206,15 +196,15 @@ export class DevCont
             return;
         }
 
-        let i = this.arr.indexOf(this.space.selectedDevice);
+        let i = this.devices.indexOf(this.space.selectedDevice);
         if (i > -1) {
-            this.arr.splice(i, 1);
+            this.devices.splice(i, 1);
             this.space.selectedDevice = null;
         }
     }
 
     clear() {
-        this.arr = [];
+        this.devices = [];
         this.space.selectedDevice = null;
     }
 

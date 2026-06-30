@@ -86,6 +86,7 @@ function serializeDevice(device: Device) {
         y1: device.y1,
         x2: device.x2,
         y2: device.y2,
+        c: device.c,
     };
 
     if (device instanceof Heater) {
@@ -150,7 +151,7 @@ function restoreLine(data: any): Line {
 
 function restoreDevice(data: any): Device {
     if (data.kind === 'Heater') {
-        const heater = new Heater(data.x1, data.y1, data.x2, data.y2, data.rate ?? 0);
+        const heater = new Heater(data.x1, data.y1, data.x2, data.y2, data.rate ?? 0, data.c);
         heater.erg = typeof data.erg === 'number' ? data.erg : heater.erg;
         return heater;
     }

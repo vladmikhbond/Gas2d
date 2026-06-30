@@ -24,9 +24,9 @@ export default class Space
     // підраховує тепло при нагріванні 
     heatAccounting (dE: number) {if (dE > 0) this.givenHeat += dE; else this.takenHeat -= dE;}
 
-    private bcont: BallCont;
-    private wcont: WallCont;
-    private dcont: DevCont;
+    private bcont!: BallCont;
+    private wcont!: WallCont;
+    private dcont!: DevCont;
     
     selectedLine: Line | null = null;
     selectedBall: Ball | null = null;
@@ -160,7 +160,7 @@ export default class Space
     }
 
     devices() { 
-        return this.dcont.values() 
+        return this.dcont.devices;
     }
 
 //#endregion Devices

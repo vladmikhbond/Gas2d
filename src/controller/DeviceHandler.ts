@@ -54,7 +54,7 @@ export default class DeviceHandler extends Handler
             } 
             else if (t == 'h')
             {
-                this.space.addDevice(new Heater(x1, y1, x2, y2, rate));                    
+                this.space.addDevice(new Heater(x1, y1, x2, y2, rate, color));                    
             }
         }
         this.view.draw();    

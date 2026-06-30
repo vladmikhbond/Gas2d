@@ -8,11 +8,12 @@ export default class Device
    y1: number;
    x2: number;
    y2: number;
+   c: string;  // колір куль, на які діє пристрій
 
    // встановлюється при додаванні девайса до простіру
    space: Space | null = null;
 
-   constructor(x1: number, y1: number, x2: number, y2: number,)
+   constructor(x1: number, y1: number, x2: number, y2: number, c = '')
    {
       // нормалізація і квантифікація
       if (x1 > x2) [x1, x2] = [x2, x1];
@@ -20,6 +21,7 @@ export default class Device
       [x1, x2, y1, y2] = [x1, x2, y1, y2].map(x => quanty(x));
       
       this.x1 = x1; this.y1 = y1; this.x2 = x2; this.y2 = y2; 
+      this.c = c;
    }
    
    isInside(x:number, y: number) {

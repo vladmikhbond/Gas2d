@@ -117,13 +117,13 @@ export function getDevsParams(): [string, number, string] | null
     }
 
     // validation
-    const [type_, r, c] = ps!;
+    let [type_, r, c] = ps!;
     if (type_ == undefined|| type_ != 'm' && type_ != 'h' )
         return errMesage("type = 'm'[eter] | 'h'[eater]", paramsElement);
     if (r == undefined || r < 0.9 || r > 1.1 )
         return errMesage("r: o.9 < r < 1.1", paramsElement);
     if (c == undefined )
-        return errMesage("c: color", paramsElement);
+        c = '';
 
     paramsElement.style.backgroundColor = "";
     return ps;

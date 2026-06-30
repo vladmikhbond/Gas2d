@@ -58,21 +58,21 @@ export default class Handler {
                 // маштабування тиску на PV і TV-діаграмі
                 if (this.space.plunger) {
                     this.space.plunger.scale(e.key);
-                    // this.view.drawMeasure();
+                    this.view.drawMeasure();
                 }
                 break;
             case '0':
                 // очистити журнал вимірювань
                 if (this.space.plunger) {
                     this.space.plunger.clearMeterings();
-                    // this.view.drawMeasure();
+                    this.view.drawMeasure();
                 }
                 break;
             case '1': case '2':
                 // встановити ширину лінії графіку
                 if (this.space.plunger) {
                     this.space.plunger.scales.w = +e.key;
-                    // this.view.drawMeasure();
+                    this.view.drawMeasure();
                 }
                 break;
             case 'f':
@@ -82,7 +82,6 @@ export default class Handler {
                     this.view.draw();
                 }
                 break;
-
         }
     }
 

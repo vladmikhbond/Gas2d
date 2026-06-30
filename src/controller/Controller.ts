@@ -18,7 +18,7 @@ export default class Controller
     private lineHandler: LineHandler;
     private deviceHandler: DeviceHandler;
 
-    timer: ReturnType<typeof setInterval> | 0 = 0;
+    timer: number | 0 = 0;
 
     private _createMode = CreateMode.Gas;
 
@@ -166,7 +166,7 @@ export default class Controller
     step() {
         this.space.time++;
         this.space.step();
-        // виміри через кожні globus.metr кроків
+        // виміри через кожні glo.metr кроків
         if (this.space.time % glo.metr == 0) {
             this.view.showTimeAndInfo();
             this.space.measure();

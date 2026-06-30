@@ -1,7 +1,7 @@
 import {glo, doc} from '../globals/globals.js';
 import Space, { CreateMode } from '../model/Space.js';
 import View from '../view/View.js';
-import { DesignerState} from '../globals/utils.js';
+import { DesignerState, restoreSceneFromJson, sceneToJson} from '../globals/utils.js';
 import Handler from './Handlers.js';
 import BallHandler from './BallHandler.js';
 import LineHandler from './LineHandler.js';
@@ -35,7 +35,8 @@ export default class Controller
         this.space.time = 0;
         glo.strikes = 0;
         
-        this.bindHandlers()
+        this.addHandlers();
+        this.addDataHandlers();
         this.setModelSize();
         this.createMode = CreateMode.Gas;
     }
@@ -76,15 +77,14 @@ export default class Controller
     setModelSize() {
         let [w, h] = [this.space.width, this.space.height];
         document.documentElement.style.setProperty('--canvas-width', w+'px');
-        document.documentElement.style.setProperty('--canvas-height', h+'px');
-        // document.getElementById("savedSceneText")!.style.width = (w - 125)+'px';             
+        document.documentElement.style.setProperty('--canvas-height', h+'px');            
         doc.canvas.height = h;
         doc.canvas.width = w;
         doc.canvas2.height = h;
         doc.canvas2.width = w;
     }
 
-    private bindHandlers() {
+    private addHandlers() {
 
         // Size params changed 
         document.getElementById("sizeParams")!.addEventListener("keydown", (e: KeyboardEvent) => 
@@ -135,7 +135,28 @@ export default class Controller
             }
         });
 
+        // helpButton
+        document.getElementById("helpButton")!.addEventListener("click", () => {
+            window.open("help.html", "_blank")?.focus();
+        });
+
     } 
+
+    addDataHandlers() 
+    {
+        const areaEl = <HTMLTextAreaElement>document.getElementById("savedSceneText"); 
+
+        document.getElementById("saveSceneButton")!.addEventListener("click", () => {
+            areaEl.value = sceneToJson(this.space);
+        });
+
+        document.getElementById("loadSceneButton")!.addEventListener("click", () => {
+            restoreSceneFromJson(areaEl.value, this.space);
+            this.stop();
+            this.space.time = 0;
+            this.view.draw();
+        });
+    }
  
 
     private switchHandlers(handler: Handler)  {

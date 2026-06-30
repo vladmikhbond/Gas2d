@@ -38,6 +38,10 @@ export default class Space
     constructor(width: number, height: number) {
         this.width = width;
         this.height = height;
+        this.resetContainers();
+    }
+
+    resetContainers() {
         this.bcont = new BallCont(this);
         this.wcont = new WallCont(this);
         this.dcont = new DevCont(this);

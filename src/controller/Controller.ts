@@ -1,7 +1,7 @@
 import {glo, doc} from '../globals/globals.js';
 import Space, { CreateMode } from '../model/Space.js';
 import View from '../view/View.js';
-import { DesignerState, restoreSceneFromJson, sceneToJson} from '../globals/utils.js';
+import { restoreSceneFromJson, sceneToJson} from '../globals/utils.js';
 import Handler from './Handlers.js';
 import BallHandler from './BallHandler.js';
 import LineHandler from './LineHandler.js';
@@ -11,9 +11,6 @@ import { getSizeParams, getSpaceParams } from './params.js';
 
 export default class Controller 
 {
-    state = DesignerState.Devices;
-    substate = 0;
-
     space: Space;
     view: View;
 
@@ -172,7 +169,7 @@ export default class Controller
         // виміри через кожні globus.metr кроків
         if (this.space.time % glo.metr == 0) {
             this.view.showTimeAndInfo();
-            //this.space.measure();
+            this.space.measure();
             // this.view.drawMeasure();
         }
         this.view.draw();

@@ -1,12 +1,10 @@
-import {DesignerState} from '../globals/utils.js';
 import Space from '../model/Space.js';
 import View from '../view/View.js';
 import Controller from './Controller.js';
 import Ball from '../model/Ball.js';
 import Device from '../model/Device.js';
 import Line from '../model/Line.js';
-import {doc} from '../globals/globals.js';
-import {Plunger} from '../model/Plunger.js';
+
 
 
 export default class Handler {

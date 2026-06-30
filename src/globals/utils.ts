@@ -5,12 +5,7 @@ import Line from '../model/Line.js';
 import Space from '../model/Space.js';
 import {Plunger} from '../model/Plunger.js';
 import {Heater} from '../model/Heaters.js';
-
-export enum DesignerState {
-    Devices,
-    Balls,
-    Lines
-}
+import {Measurer} from '../model/Measurer.js';
 
 // квантує простір при конструюванні сцен
  export   function quanty (x: number) { 
@@ -154,10 +149,9 @@ function restoreDevice(data: any): Device {
         const heater = new Heater(data.x1, data.y1, data.x2, data.y2, data.rate ?? 0, data.c);
         heater.erg = typeof data.erg === 'number' ? data.erg : heater.erg;
         return heater;
+    } else {
+        return new Measurer(data.x1, data.y1, data.x2, data.y2, data.c);
     }
-
-    const device = new Device(data.x1, data.y1, data.x2, data.y2);
-    return device;
 }
 
 // Зберігає поточний стан об'єкта space в форматі JSON.

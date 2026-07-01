@@ -145,7 +145,7 @@ export default class View
         }    
     }
 
-    //#endregion Canvas1    
+//#endregion Canvas1    
  
 //#region Canvas2
 
@@ -272,25 +272,17 @@ export default class View
     }
 
 
-    
-    // // private X = 5;
-    // private Y = 30;
-    // private W = doc.canvas2.width - 10;
-    // private H = doc.canvas2.height - this.Y - 5;
-
-
     drawPlungerMeters(plun: Plunger) {
 
         if (plun.meterings.length < 2) {
             return;
         }
 
-        let W = 300;
-        let H = plun.bottom - plun.top; 
+        let W = plun.x2 - plun.x1 ;
+        let H = plun.realBottom - plun.top; 
         let X = doc.canvas2.width - W - 10;
         let Y = plun.top
         
-        const vMax = (plun.realBottom - plun.top) * (plun.x2 - plun.x1);
         const ctx = this.ctx2;
 
         // background
@@ -324,7 +316,7 @@ export default class View
             let p = Y + H - (metering.p / 10 * H) * plun.scales.P;
             let t = Y + H - (metering.t / 3000 * H) * plun.scales.T;
             let s = Y + H/2 - (metering.s / 300 * H) * plun.scales.S;
-            let v = X + (metering.v / vMax * W) * plun.scales.V;
+            let v = X + (metering.v / H) * plun.scales.V;
             let x = X + (metering.t / 300 * W) * plun.scales.X;
             
             return [p, t, s, v, x];    

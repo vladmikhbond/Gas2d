@@ -4,6 +4,7 @@ import Controller from './Controller.js';
 import Ball from '../model/Ball.js';
 import Device from '../model/Device.js';
 import Line from '../model/Line.js';
+import { doc } from '../globals/globals.js';
 
 
 
@@ -28,6 +29,7 @@ export default class Handler {
         this.currentX = e.offsetX;
         this.currentY = e.offsetY;
         this.isDrawing = true;
+        doc.canvas.focus({focusVisible: true})
     }
 
     mousemove(e: MouseEvent) {

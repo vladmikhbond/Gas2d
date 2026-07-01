@@ -8,9 +8,9 @@ const CLICK_DIST = 3;
 
 export default class BallHandler extends Handler {
 
-    constructor(controller: Controller) {
-       super(controller);
-    }
+    // constructor(controller: Controller) {
+    //    super(controller);
+    // }
    
     mousedown(e: MouseEvent) {
         super.mousedown(e);

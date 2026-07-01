@@ -10,9 +10,9 @@ import { getWallParams } from './params.js';
 
 export default class LineHandler extends Handler {
 
-    constructor(controller: Controller) {
-       super(controller);
-    }
+    // constructor(controller: Controller) {
+    //    super(controller);
+    // }
    
     mousedown(e: MouseEvent) {
         super.mousedown(e);

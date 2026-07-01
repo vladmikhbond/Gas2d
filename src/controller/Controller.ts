@@ -13,12 +13,12 @@ export default class Controller
 {
     space: Space;
     view: View;
-
+    timer: number | 0 = 0;
+    time = 0           // такти часу
+    
     private ballHandler: BallHandler;
     private lineHandler: LineHandler;
     private deviceHandler: DeviceHandler;
-
-    timer: number | 0 = 0;
 
     private _createMode = CreateMode.Gas;
 
@@ -29,7 +29,7 @@ export default class Controller
         this.ballHandler = new BallHandler(this);
         this.lineHandler = new LineHandler(this);
         this.deviceHandler = new DeviceHandler(this);
-        this.space.time = 0;
+        this.time = 0;
         glo.strikes = 0;
         
         this.addHandlers();
@@ -150,7 +150,7 @@ export default class Controller
         document.getElementById("loadSceneButton")!.addEventListener("click", () => {
             restoreSceneFromJson(areaEl.value, this.space);
             this.stop();
-            this.space.time = 0;
+            this.time = 0;
             this.view.draw();
         });
     }
@@ -164,11 +164,11 @@ export default class Controller
     }
 
     step() {
-        this.space.time++;
+        this.time++;
         this.space.step();
         // виміри через кожні glo.metr кроків
-        if (this.space.time % glo.metr == 0) {
-            this.view.showTimeAndInfo();
+        if (this.time % glo.metr == 0) {
+            this.view.showTimeAndInfo(this.time);
             this.space.measure();
             this.view.drawMeasure();
         }

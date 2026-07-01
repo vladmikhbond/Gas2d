@@ -400,10 +400,10 @@ export default class View
 
 //#region DOM
 
-    showTimeAndInfo() {
+    showTimeAndInfo(time: number) {
         const el = <HTMLSpanElement>document.getElementById("info");
         let strikes = this.space.N ? (glo.strikes * 100 / this.space.N).toFixed(1) : "0";
-        el.innerHTML = `T=${this.space.time} &nbsp;&nbsp; N=${this.space.N}, &nbsp;&nbsp; strikes=${strikes}%`;
+        el.innerHTML = `T=${time} &nbsp;&nbsp; N=${this.space.N}, &nbsp;&nbsp; strikes=${strikes}%`;
     } 
 
 //#endregion DOM

@@ -17,7 +17,6 @@ export default class Space
 
     N = 0              // поточна кількість куль
 
-    time = 0           // такти часу
     cell = 20          // сторона комірки
     givenHeat = 0;      // тепло, віддане усіма нагрівачами
     takenHeat = 0;      // тепло, забране усіма охолоджувачами 
@@ -52,7 +51,6 @@ export default class Space
         this.clearLines();
         this.clearDevices();
         this.givenHeat = this.takenHeat = 0;
-        this.time = 0;
     }
 
 //#region Balls

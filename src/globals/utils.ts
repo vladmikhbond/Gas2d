@@ -160,7 +160,6 @@ export function sceneToJson(space: Space): string {
         width: space.width,
         height: space.height,
         cell: space.cell,
-        time: space.time,
         givenHeat: space.givenHeat,
         takenHeat: space.takenHeat,
         N: space.N,
@@ -199,7 +198,6 @@ export function restoreSceneFromJson(json: string, space: Space): void {
         space.resetContainers();
     }
 
-    space.time = typeof scene.time === 'number' ? scene.time : 0;
     space.givenHeat = typeof scene.givenHeat === 'number' ? scene.givenHeat : 0;
     space.takenHeat = typeof scene.takenHeat === 'number' ? scene.takenHeat : 0;
     space.N = typeof scene.N === 'number' ? scene.N : 0;

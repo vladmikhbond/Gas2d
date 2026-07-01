@@ -285,9 +285,9 @@ export default class View
             return;
         }
 
-        let W = 200;
-        let H = doc.canvas2.height / 2; 
-        let X = doc.canvas2.width - W;
+        let W = 300;
+        let H = plun.bottom - plun.top; 
+        let X = doc.canvas2.width - W - 10;
         let Y = plun.top
         
         const vMax = (plun.realBottom - plun.top) * (plun.x2 - plun.x1);

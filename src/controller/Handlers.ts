@@ -70,12 +70,9 @@ export default class Handler {
                     this.view.drawMeasure();
                 }
                 break;
-            case '1': case '2':
-                // встановити ширину лінії графіку
-                if (this.space.plunger) {
-                    this.space.plunger.scales.w = +e.key;
-                    this.view.drawMeasure();
-                }
+            case '1': 
+                this.controller.stop();            
+                this.controller.step();
                 break;
             case 'f':
                 // зафіксувати-розфіксувати поршень

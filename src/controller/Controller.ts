@@ -121,18 +121,6 @@ export default class Controller
                 this.stop();
         });
 
-        // Кey commands
-        doc.canvas.addEventListener("keydown", (e) => {
-            switch (e.key) {
-                // step execution
-                case 's': case 'S': case 'і': case 'І':
-                    this.stop();
-                    this.step();
-                    break;
-            }
-        });
-
-        // helpButton
         document.getElementById("helpButton")!.addEventListener("click", () => {
             window.open("help.html", "_blank")?.focus();
         });
@@ -181,6 +169,10 @@ export default class Controller
             clearInterval(this.timer);
             this.timer = 0;
         }
+        // draw
+        this.view.showTimeAndInfo(this.time);
+        this.space.measure();
+        this.view.drawMeasure();
     }
 
     run() {

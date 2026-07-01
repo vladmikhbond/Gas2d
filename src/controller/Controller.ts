@@ -127,11 +127,12 @@ export default class Controller
 
         // Change visibility of gas particles
         document.getElementById("visRange")!.addEventListener("change", (e: Event) =>
-        {
-            let v = (e.target as HTMLSelectElement).value;
-            this.view.viz = {"1": 100, "2": 10, "3": 1, }[v]!;
+        {   
+            const proc = [ 1, 2, 5, 10, 25, 50, 100];
+            let v: number = +(e.target as HTMLSelectElement).value;
+            this.view.viz = 100 / proc[v];
             this.view.draw();
-            document.getElementById("visPercentage")!.innerHTML = {"1": 1, "2": 10, "3": 100, }[v]! + '%';
+            document.getElementById("visPercentage")!.innerHTML = proc[v]! + '%';
 
         });
 

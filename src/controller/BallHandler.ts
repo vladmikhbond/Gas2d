@@ -51,8 +51,8 @@ export default class BallHandler extends Handler {
         } else {
             let ps = getGasParams();
             if (ps) {
-                const [n, r, t, m] = ps;
-                this.space.addBomb(new Bomb(n, x1, y1, x2, y2, 0, 0, t, r, m, "red"));
+                const [n, r, t, m, c] = ps;
+                this.space.addBomb(new Bomb(n, x1, y1, x2, y2, 0, 0, t, r, m, c));
             }
         }
         this.view.draw();  

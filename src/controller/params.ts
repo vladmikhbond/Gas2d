@@ -1,5 +1,4 @@
 type N2 = [number, number];
-type N4 = [number, number, number, number];
 
 export function getSizeParams(): N2 | null
 {
@@ -52,40 +51,44 @@ export function getSpaceParams(): N2 | null
     return ps;
 }
 
-export function getGasParams(): N4 | null
+type NNNNS = [number, number, number, number, string];
+
+export function getGasParams(): NNNNS | null
 {
     const paramsElement = (document.getElementById("gasParams") as HTMLInputElement)!;
-    let ps: N4;
+    let ps: NNNNS;
     try {
         ps = (new Function("", 
-            "let n, r, t, m;" + 
+            "let n, r, t, m, c;" + 
             paramsElement.value + 
-            "; return [n, r, t, m]" 
+            "; return [n, r, t, m, c]" 
         ))();
     } catch {
         return errMesage("Grammar error", paramsElement);
     }
     // перевірки
-    const [n, r, t, m] = ps;
+    let [n, r, t, m, c] = ps;
     if (n == undefined || n < 0) 
-        return errMesage("n: n > 0", paramsElement);
+        n = 1000;
     if (r == undefined || r < 0) 
-        return errMesage("r: r > 0", paramsElement);
+        r = 1;
     if (t == undefined || t < 0) 
-        return errMesage("t: t > 0", paramsElement);
+        t = 20;
     if (m == undefined || m < 0) 
-        return errMesage("m: m > 0", paramsElement);
+        m = 1;
+    if (c == undefined ) 
+        c = "red";
 
     paramsElement.style.backgroundColor = "";
-    return ps;
+    return [n, r, t, m, c];
 }
 
 export function getWallParams(): string | null 
 {
     const paramsElement = (document.getElementById("wallParams") as HTMLInputElement)!;
-    let t: string | null ;
+    let type_: string | null ;
     try {
-        t = (new Function("", 
+        type_ = (new Function("", 
             "let type;" + 
             paramsElement.value + 
             "; return type" 
@@ -94,11 +97,11 @@ export function getWallParams(): string | null
         return errMesage("Grammar error", paramsElement);
     }
     // validation
-    if (!t || t != 'r' && t != 'p' )
-        return errMesage("type = 'r'|'p'", paramsElement);
+    if (!type_ || type_ != 'r' && type_ != 'p' )
+        type_ = 'r';
  
     paramsElement.style.backgroundColor = "";
-    return t;
+    return type_;
 }
 
 
@@ -119,14 +122,14 @@ export function getDevsParams(): [string, number, string] | null
     // validation
     let [type_, r, c] = ps!;
     if (type_ == undefined|| type_ != 'm' && type_ != 'h' )
-        return errMesage("type = 'm'[eter] | 'h'[eater]", paramsElement);
+        type_ = 'm';
     if (r == undefined || r < 0.9 || r > 1.1 )
-        return errMesage("r: o.9 < r < 1.1", paramsElement);
+        r = 1.001;
     if (c == undefined )
-        c = '';
+        c = 'red';
 
     paramsElement.style.backgroundColor = "";
-    return ps;
+    return [type_, r, c];
 }
 
 

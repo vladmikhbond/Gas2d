@@ -125,6 +125,16 @@ export default class Controller
             window.open("help.html", "_blank")?.focus();
         });
 
+        // Change visibility of gas particles
+        document.getElementById("visRange")!.addEventListener("change", (e: Event) =>
+        {
+            let v = (e.target as HTMLSelectElement).value;
+            this.view.viz = {"1": 100, "2": 10, "3": 1, }[v]!;
+            this.view.draw();
+            document.getElementById("visPercentage")!.innerHTML = {"1": 1, "2": 10, "3": 100, }[v]! + '%';
+
+        });
+
     } 
 
     addDataHandlers() 

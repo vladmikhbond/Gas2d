@@ -56,6 +56,10 @@ label {
 section {
     margin-bottom: 6px;
 }
+
+#visRange {
+    width: 120px;
+}
 /* <!------------------ canvases ----------------> */
 
 .canvas-frame {

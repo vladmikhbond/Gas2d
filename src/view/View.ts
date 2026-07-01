@@ -16,7 +16,7 @@ export default class View
     ctx2: CanvasRenderingContext2D;
 
 
-    viz = 10           // малювати кожну vi-ту частку
+    viz = 10           // малювати кожну viz-ту частку
 
     constructor(space: Space) {
         this.space = space;
